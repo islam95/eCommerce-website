@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Khizir Store</title>
+	<meta name="Author" content="Islam Dudaev" />
+	<meta name="description" content="Khizir online shop for clothing." />
+	<meta name="keywords" content="online shop, online store, khizir store, khizir shop" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="mainWrapper">
+		<header>
+			<!-- This contains Logo and links -->
+			<div id="logo">
+				<a href="./index.html">
+					<img src="./img/logo.gif" alt="Khizir Store" />
+				</a>
+			</div>
+
+			<!-- Search field -->
+			<div id="search">
+				<form name="search" action="#" method="get">
+					<!-- Search field. Javascript used for deleting the search text in search field when user types in. -->
+					<input type="text" name="q" value="Search..." onfocus="if(this.value == 'Search...'){this.value = '';}" onblur="if(this.value == ''){this.value = 'Search...';}" />
+				</form>
+			</div>
+
+			<div id="headerLinks"><a href="#" title="Login/Register">Login/Register</a><a href="#" title="Cart">Basket</a>
+			</div>
+		</header>
+
+		<section id="offer">
+			<!-- The offer section displays a banner text for promotions -->
+			<h1>OFFER 50%</h1>
+			<p>REALLY AWESOME DISCOUNTS THIS JULY</p>
+		</section>
+
+		<nav>
+			<!-- This contains main navigation bar of the website -->
+			<ul>
+				<li><a href="./index.html">HOME</a>
+				</li>
+				<li><a href="#">MEN</a>
+				</li>
+				<li><a href="#">WOMEN</a>
+				</li>
+				<li><a href="#">ELSE</a>
+				</li>
+				<li><a href="#">ABOUT</a>
+				</li>
+				<li><a href="#">DELIVERY</a>
+				</li>
+				<li><a href="#">CONTACT</a>
+				</li>
+			</ul>
+		</nav>
+
+		<div id="content">
+			<div class="sidebar">
+				<!-- This adds a sidebar -->
+				<div id="menubar">
+					<div class="menu">
+						<h1> Categories </h1>
+						<hr>
+						<ul>
+							<!-- List of links under menuset 1 -->
+							<li><a href="#" title="Link">Link 1</a>
+							</li>
+							<li><a href="#" title="Link">Link 2</a>
+							</li>
+							<li><a href="#" title="Link">Link 3</a>
+							</li>
+							<li class="notimp">
+								<!-- notimp class is applied to remove this link from the tablet and phone views --><a href="#" title="Link">Link 4</a>
+							</li>
+						</ul>
+					</div>
+					<div class="menu">
+						<h1>MENU ITEM 2 </h1>
+						<!-- Title for menuset 2 -->
+						<hr>
+						<ul>
+							<!--List of links under menuset 2 -->
+							<li><a href="#" title="Link">Link 1</a>
+							</li>
+							<li><a href="#" title="Link">Link 2</a>
+							</li>
+							<li><a href="#" title="Link">Link 3</a>
+							</li>
+							<li class="notimp">
+								<!-- notimp class is applied to remove this link from the tablet and phone views --><a href="#" title="Link">Link 4</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="mainContent">
+				<div id="cart">
+					<h2>Cart</h2>
+					<table>
+						<tr class="bold">
+							<td>Product</td>
+							<td>Description</td>
+							<td>Color</td>
+							<td>Size</td>
+							<td>Qty</td>
+							<td>Amount</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="7">
+								<hr />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="img/products/1.jpg" class="photo" />
+							</td>
+							<td class="title">Superdry Mens Highwayman Bridge Coat</td>
+							<td>One color</td>
+							<td>M</td>
+							<td>
+								<input type="text" name="qty" value="1" />
+							</td>
+							<td class="bold">£100.00</td>
+							<td>
+								<a href="#" class="remove">
+									<img src="img/payments/remove_x.gif" />
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="7">
+								<hr />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="img/products/1.jpg" />
+							</td>
+							<td class="title">Superdry Mens Highwayman Bridge Coat</td>
+							<td>One color</td>
+							<td>M</td>
+							<td>
+								<input type="text" name="qty" value="1" />
+							</td>
+							<td class="bold">£100.00</td>
+							<td>
+								<a href="#" class="remove">
+									<img src="img/payments/remove_x.gif" />
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="7" class="total"><p>Total: <span>£200.00</span></p></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<form name="update" action="#" method="post" class="left">
+									<p>
+										<input type="image" src="img/update.jpg" alt="Update cart" onmouseover="this.src='img/update_active.jpg'" onmouseout="this.src='img/update.jpg'" /> 
+									</p>
+								</form>
+							</td>
+							<td colspan="5">
+								<form name="checkout" action="#" method="post" class="right">
+									<p>
+										<input type="image" src="img/checkout.jpg" alt="Checkout" onmouseover="this.src='img/checkout_active.jpg'" onmouseout="this.src='img/checkout.jpg'" /> 
+									</p>
+								</form>
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+			</div>
+		</div>
+		<footer>
+			<!-- This is the footer -->
+			<div id="left">
+				<p>Payment methods: </p>
+				<p>Copyright &copy; <a href="index.html">Khizir.com</a>| All rights reserved.</p>
+			</div>
+			<div id="right">
+				<p><a href="#" title="Link">Delivery</a>
+				</p>
+				<p><a href="#" title="Link">Shipping</a>
+				</p>
+				<p><a href="#" title="Link">Contact</a>
+				</p>
+				<p><a href="#" title="Link">Contact</a>
+				</p>
+				
+				
+				<p>
+					<a href="http://jigsaw.w3.org/css-validator/check/referer">
+						<img style="border:0;width:88px;height:31px; float:right"
+							src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+							alt="Valid CSS!" />
+					</a>
+				</p>
+			</div>
+		</footer>
+	</div>
+</body>
+
+</html>

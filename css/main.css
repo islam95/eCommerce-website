@@ -1,0 +1,1012 @@
+@charset "utf-8";
+/* 
+	File:		main.css
+	Author:		Islam Dudaev
+	Date:		2 February, 2015
+	Modified:	3 April, 2015
+	Version:	1.4
+*/
+
+
+/* Front Page */
+
+/* Whole page content */
+#mainWrapper {
+	font-family: Verdana, Arial, Tahoma, sans-serif;
+	width: 80%;
+	padding-left: 10%;
+}
+/* Header ----------------------------------------------------------------------------------------*/
+
+header {
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	background-color: #FFFFFF;
+}
+/* Logo */
+
+#logo {
+	float: left;
+	width: 139px;
+	padding-left: 5px;
+}
+/* Search field in nav bar */
+
+#search {
+	float: left;
+	width: 47%;
+	text-align: right;
+	height: 30px;
+	padding-top: 10px;
+}
+
+#search input {
+	width: 370px;
+	height: 25px;
+	outline: none;
+	text-indent: 8px;
+	font-size: medium;
+	color: #929292;
+	border-style: solid;
+	border-color: #375A78;
+	border-radius: 5px;
+}
+/* div for Links in header */
+
+#headerLinks {
+	float: left;
+	width: 37%;
+	text-align: right;
+	padding-top: 10px;
+}
+/* Links in header */
+
+#headerLinks a {
+	color: #000000;
+	padding-left: 20px;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+#headerLinks a:hover {
+	color: #ADA9A9;
+}
+
+.imgBasket {
+	float: right;
+	width: 20px;
+	height: 20px;
+}
+
+/* Offer text banner -------------------------------------------------*/
+
+#offer {
+	clear: both;
+	background-color: #375A78;
+	color: #FFFFFF;
+	padding-left: 115px;
+	padding-top: 57px;
+	padding-bottom: 57px;
+}
+
+.bold {
+	font-weight: bold;
+}
+/* Navigation bar -------------------------------------------------------------------------------------*/
+
+nav {
+	clear: both;
+	background-color: #375A78;
+	padding-top: 20px;
+	padding-bottom: 35px;
+	margin-top: 20px;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+/* List items in nav bar so that they are in the same line */
+
+nav ul li {
+	float: left;
+}
+/* Links in Navigation bar. Margin for space between them. */
+
+nav a {
+	color: #FFFFFF;
+	display: block;
+	margin: 0 20px;
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: #ADA9A9;
+}
+/* Main content of the site ---------------------------------------------------------------------------*/
+
+#content {
+	clear: both;
+	padding-top: 27px;
+}
+/* Sidebar --------------------------------------------------- */
+
+#content .sidebar {
+	float: left;
+	width: 18%;
+	padding-left: 2%;
+	padding-right: 2%;
+	text-align: center;
+	background-color: #375A78;
+	padding-top: 10px;
+	margin-bottom: 27px;
+}
+/*menubar's properties for menu in sidebar */
+
+#content .sidebar #menubar {
+	text-align: left;
+	color: #FFFFFF;
+	position: relative;
+}
+/* Menu in sidebar */
+
+.sidebar #menubar .menu {
+	margin-bottom: 20px;
+}
+/*menu elements */
+
+.menu ul li {
+	list-style-type: none;
+	font-size: large;
+	left: -40px;
+	position: relative;
+	padding-bottom: 5px;
+}
+/*Links in sidebar */
+
+.sidebar #menubar .menu ul li a {
+	color: #FFFFFF;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.sidebar #menubar .menu ul li a:hover {
+	color: #ADA9A9;
+	text-decoration: none;
+}
+/* Menu headings in sidebar */
+
+#menubar .menu h1 {
+	font-size: 15px;
+}
+/* main content of the site ---------------------------------------*/
+
+#content .mainContent, .paging {
+	float: left;
+	width: 75%;
+	text-align: center;
+	padding-left: 3%;
+}
+/* New header and sorting ------------------------ */
+
+#content .mainContent .headerNew {
+	padding-bottom: 10px;
+	overflow-x: hidden;
+}
+
+.headerNew ul {
+	list-style-type: none;
+}
+
+.headerNew ul li {
+	float: left;
+	color: #375A78;
+	font-style: italic;
+	font-size: small;
+	margin-right: 7px;
+	position: relative;
+	top: -12px;
+	left: 120px;
+}
+/* New items text style */
+
+.headerNew .new {
+	color: #375A78;
+	font-style: italic;
+	font-weight: bold;
+	font-size: large;
+	position: relative;
+	top: -22px;
+	left: -24px;
+	padding: 4px;
+}
+/* Sorting span items */
+
+.headerNew a {
+	color: #000000;
+	border-bottom: 1px dashed;
+	font-weight: bold;
+	text-decoration: none;
+}
+/* Product rows for catalog ------------------------------*/
+
+#content .mainContent .productRow {
+	overflow: hidden;
+}
+/* Each product Information in the catalog */
+
+.mainContent .productRow .productInfo {
+	float: left;
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	width: 22%;
+}
+/* Product's images in catalog */
+
+.productInfo div img {
+	width: 78%;
+	height: 150px;
+}
+/* Prices of a products in catalog */
+
+.productRow .productInfo .price {
+	position: relative;
+	color: #1976D9;
+	font-weight: bold;
+	font-size: 18px;
+}
+/* Content holder for products in catalog*/
+
+.productRow .productInfo .productContent a {
+	position: relative;
+	text-decoration: none;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 200;
+}
+
+.productContent a:hover {
+	color: #ADA9A9;
+}
+/* Buy button for products in catalog */
+
+.productRow .productInfo .addToBasket{
+	display: block;
+	width: 108px;
+	height: 35px;
+	position: relative;
+	margin-left: 30px;
+}
+.productRow .productInfo .buyB {
+	background: url("../images/add_To_Cart.jpg") no-repeat;
+}
+
+.productRow .productInfo .buyB:hover {
+	background: url("../images/add_To_Cart2.jpg") no-repeat;
+}
+
+.productRow .productInfo .removeB {
+	background: url("../images/remove_Button1.png") no-repeat;
+}
+
+.productRow .productInfo .removeB:hover {
+	background: url("../images/remove_Button2.png") no-repeat;
+}
+
+
+/* footer ------------------------------------------------------------------------------------------*/
+
+#mainWrapper footer {
+	clear: both;
+	overflow: auto;
+	background-color: #375A78;
+	font-style: normal;
+	font-weight: 200;
+	line-height: 1.5;
+	padding: 22px;
+}
+/*Each footer content */
+#mainWrapper footer #left,
+#right {
+	width: 44%;
+	float: left;
+	padding-left: 4%;
+	padding-right: 2%;
+	color: #FFFFFF;
+}
+
+footer a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+footer a:hover {
+	color: #929292;
+}
+
+footer #left a,
+#right p {
+	padding-right: 13px;
+}
+
+footer #right p {
+	display: inline;
+}
+
+footer #right  {
+	padding-top: 15px;
+	text-align: right;
+}
+/* Media query for tablets -------------------------------------------------------------------------------*/
+
+@media screen and (max-width: 800px) {
+	#search input {
+		width: 200px;
+		margin-left: 40px;
+	}
+	#headerLinks {
+		float: right;
+		width: 50%;
+		margin-top: 10px;
+		margin-bottom: 15px;
+	}
+	/* Links in header */
+	
+	header #headerLinks a {
+		padding-left: 0px;
+		padding-right: 30px;
+	}
+	/* Offer- Text banner */
+	
+	#mainWrapper #offer {
+		padding-left: 22%;
+	}
+	/* offer banners content */
+	
+	#mainWrapper #offer p {
+		font-size: small;
+	}
+	/*The sidebar and main content of page */
+	
+	#content {
+		position: relative;
+		top: -22px;
+		width: 100%;
+		overflow: hidden;
+	}
+	/* sidebar */
+	
+	#content .sidebar {
+		float: none;
+		width: 100%;
+		height: auto;
+		overflow: auto;
+		padding-left: 5px;
+		padding-top: 0px;
+	}
+	/* horizontal separators in sidebar */
+	
+	#content .sidebar hr {
+		display: none;
+	}
+	/*menubar in sidebar */
+	
+	#content .sidebar #menubar {
+		position: relative;
+		left: -7%;
+		overflow: hidden;
+		width: 95%;
+		padding-top: 0px;
+	}
+	/* menus in sidebar */
+	
+	.sidebar #menubar .menu {
+		width: 100%;
+		text-align: center;
+		position: relative;
+		top: 16px;
+	}
+	/*menu headings in sidebar */
+	
+	#menubar .menu h1 {
+		display: inline;
+		font-size: medium;
+		padding-right: 6%;
+	}
+	/* Unordered List of links */
+	
+	#menubar .menu ul {
+		display: inline;
+	}
+	/*list elements */
+	
+	#menubar .menu ul li {
+		display: inline;
+		font-size: medium;
+		padding-left: 0%;
+		padding-right: 3%;
+	}
+	/*The link to be hidden in tablet view */
+	
+	.sidebar #menubar .menu ul .notimp {
+		display: none;
+	}
+	/* main content region of page */
+	
+	#mainWrapper #content .mainContent {
+		overflow: hidden;
+		width: 95%;
+		margin-top: 40px;
+	}
+	/* Prices of products in catalog view */
+	
+	.productRow .productInfo .price {
+		font-size: 19px;
+	}
+	/* Content holders in catalog view */
+	
+	.productRow .productInfo .productContent {
+		font-size: 16px;
+	}
+	/* Buy buttons in catalog view */
+	
+	.productRow .productInfo .buyButton {
+		font-size: 15px;
+	}
+	/* Footer region */
+	
+	#mainWrapper footer {
+		font-size: 15px;
+		padding-left: 16px;
+		overflow: hidden;
+	}
+	
+	#mainWrapper footer #left {
+		width: 80%;
+		
+	}
+	
+	/* Container for links in footer */
+	footer #right {
+		float: none;
+		width: 98%;
+		position: relative;
+		top: 17px;
+		clear: both;
+		text-align: center;
+		padding-bottom: 19px;
+	}
+	
+	/* Links in footer */
+	#right p a {
+		padding-right: 35px;
+	}
+}
+/*media query for small screen devices ----------------------------------------------------------------------*/
+
+@media screen and (max-width: 480px) {
+	/* Logo and search */
+	
+	#mainWrapper header #logo,
+	#search {
+		width: 100%;
+		text-align: center;
+	}
+	#search {
+		margin-left: -4%;
+	}
+	#search input {
+		width: 50%;
+		text-align: center;
+		height: 20px;
+	}
+	/*Container for links in header */
+	
+	#mainWrapper header #headerLinks {
+		width: 100%;
+		text-align: center;
+		background-color: #375A78;
+		padding-bottom: 15px;
+	}
+	/* Links in header */
+	
+	header #headerLinks a {
+		text-align: center;
+		color: #FFFFFF;
+		padding-right: 15px;
+		padding-left: 0px;
+	}
+	/*Offer - Text Banner */
+	
+	#mainWrapper #offer {
+		padding-left: 0px;
+		text-align: center;
+	}
+	/* Menubar in sidebar */
+	
+	#content .sidebar #menubar {
+		position: relative;
+		left: -8%;
+		text-align: center;
+	}
+	/*Menu headings in sidebar */
+	
+	#menubar .menu h1 {
+		width: 100%;
+		display: block;
+	}
+	/* Unordered list for menu elements */
+	
+	.menu ul {
+		position: relative;
+		padding-left: 24%;
+	}
+	/* Main content which excludes the sidebar */
+	
+	#mainwrapper #content .mainContent {
+		margin-top: -81px;
+		text-align: center;
+		width: 100%;
+		padding-left: 0px;
+	}
+	/* Each product in catalog view */
+	
+	.mainContent .productRow .productInfo {
+		width: 100%;
+		display: block;
+		padding-left: 0px;
+		padding-right: 0px;
+		position: relative;
+		left: -2%;
+	}
+	#mainWrapper footer div {
+		width: 100%;
+		margin-left: -16px;
+		text-align: justify;
+		padding-bottom: 16px;
+		overflow: auto;
+	}
+	/* Container for links in footer */
+	
+	#mainWrapper footer #right {
+		padding-left: 8%;
+	}
+}
+
+/* Product page */
+
+/* Horizontal navigation arrow */ 
+.mainContent #navArrow {
+	font-size: 90%;
+	margin-bottom: 50px;
+}
+.mainContent #navArrow td {
+	padding: 0 3px;
+}
+#navArrow a {
+	color: #5783A8;
+	text-decoration: none;
+}
+#navArrow a:hover {
+	color: #375A78;
+}
+#navArrow img {
+	width: 13px;
+	height: 15px;
+  	margin-bottom: -2px;
+}
+
+/* Product description */
+.mainContent #product {
+	margin-top: 20px;
+	text-align: left;
+}
+#product img {
+	width: 220px;
+	height: 260px;
+}
+#product td {
+	font-size: 85%;
+	margin-bottom: 8px;
+}
+
+#product table p.price {
+	font-size: 130%;
+	color: #3072C6;
+	font-weight: bold;
+}
+
+#product table td {
+	padding-right: 20px;
+}
+
+
+#product .title {
+	font-weight: bold;
+	font-size: 120%;
+}
+
+#product .choose td{
+	padding-top: 20px;
+}
+
+#product .choose .addToBasket {
+	display: block;
+	width: 108px;
+	height: 35px;
+}
+
+#product .choose .buyB {
+	background: url("../images/add_To_Cart.jpg") no-repeat;
+}
+
+#product .choose .buyB:hover {
+	background: url("../images/add_To_Cart2.jpg") no-repeat;
+}
+
+#product .choose .removeB {
+	background: url("../images/remove_Button1.png") no-repeat;
+}
+
+#product .choose .removeB:hover {
+	background: url("../images/remove_Button2.png") no-repeat;
+}
+
+
+#product p.info {
+	margin-top: 40px;
+	font-weight: bold;
+}
+
+/* Other items */
+.mainContent #others .productInfo {
+	width: 15%;
+}
+
+
+/******************** Cart ******************/
+.mainContent #cart {
+	text-align: left;
+}
+
+.mainContent #cart h2, .mainContent #order h2{
+	font-size: 120%;
+}
+
+#cart h2{
+	text-align: left;
+	margin-top: -3px;
+	padding-left: 5px;
+	padding-bottom: 5px;
+}
+
+#cart table {
+	font-size: 90%;
+	width: 100%;
+	padding: 10px;
+	border-style: solid;
+	border-color: #A7A7A7;
+	border-radius: 10px;
+	box-shadow: 0px 0px 5px #9D9B9B;
+}
+
+#cart table th, #cart table td {
+	padding: 3px 5px;
+	text-align: center;
+}
+
+#cart .photo {
+	width: 100px;
+	height: 129px;
+}
+
+.input_qty {
+	border: 1px solid #000000;
+	width: 25px;
+	height: 23px;
+	font-size: 110%;
+	text-align: right;
+}
+
+.removeX {
+	background: url("../images/basket/removeX.png") no-repeat;
+	display: block;
+	width: 16px;
+	height: 16px;
+}
+
+#cart td.title {
+	width: 250px;
+	text-align: left;
+}
+
+#cart td.total {
+	height: 40px;
+	background-color: #EAE9E7;
+	text-align: right;
+	font-weight: bolder;
+}
+
+#cart td.total span {
+	color: #900900;
+	padding-right: 6%;
+	padding-left: 25px;
+}
+
+.update {
+	background: url(../images/basket/update.jpg) no-repeat;
+	display: block;
+	width: 100px;
+	height: 43px;
+	float: left;
+	cursor: pointer;
+	margin-left: 30px;
+	margin-top: 30px;
+
+}
+
+.update:hover {
+	background: url(../images/basket/update_active.jpg) no-repeat;
+}
+
+#checkout {
+	float: right;
+	margin-top: 30px;
+	margin-right: 30px;
+	margin-bottom: 50px;
+	width: 130px;
+	height: 25px;
+	color: #FFFFFF;
+	font-size: medium;
+	text-transform: uppercase;
+	border-radius: 3px;
+	background-color: #375A78;
+	padding-top: 12px;
+	padding-right: 15px;
+	padding-bottom: 7px;
+	padding-left: 20px;
+	text-decoration: none;
+}
+
+#checkout:hover {
+	background-color: #628AAC;	
+}
+
+
+/********** small basket ***********/
+
+#smallB {
+	float: right;
+	margin-right: 20px;
+	margin-top: -42px;
+	border-style: solid;
+	border-color: #FFFFFF;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-bottom: 10px;
+}
+
+#smallB h3 {
+	text-align: center;
+}
+
+#basket_right {
+	font-size: 90%;
+}
+
+#smallB table tr td {
+	padding-bottom: 8px;
+	padding-right: 30px;
+}
+
+#basket_right .items, #basket_right .total{
+	float: right;
+}
+
+#smallB a{
+	color: #FFFFFF;
+}
+
+#smallB a:hover{
+	text-decoration: none;
+	color: #D4D4D4;
+}
+
+/**************** Order ********************/
+.mainContent #order {
+	text-align: left;
+}
+
+#order h1{
+	text-align: center;
+	margin-top: 0;
+}
+
+#order .ship_input {
+	margin: 10px;
+	width: 30%;
+}
+
+#order table th span{
+	color: red;
+}
+
+#order input[type="text"] {
+	border: 1px solid #000000;
+	width: 300px;
+	height: 30px;
+	font-size: 90%;
+	color: grey;
+	padding-left: 5px;
+}
+
+#order select {
+	border: 1px solid #000000;
+	width: 300px;
+	height: 30px;
+	font-size: 110%;
+}
+
+#order select option {
+	background-color: #EAE9E7;
+}
+
+.warning {
+	color: #900900;
+	display: block;
+	padding-left: 10px;
+}
+
+.aButton {
+	float: right;
+	padding: 5px 20px;
+	background-color: #375A78;
+	color: #FFFFFF;
+	font-size: 130%;
+	margin: 35px 0;
+	margin-right: 10px;
+}
+
+/* Login and register form */
+.log_reg input[type="text"],
+.log_reg input[type="password"]{
+	border: 1px solid #000000;
+	width: 300px;
+	height: 30px;
+	font-size: 90%;
+	color: grey;
+	padding-left: 5px;
+	margin-bottom: 5px;
+}
+
+.log_reg {
+	text-align: left;
+}
+
+.log_reg .aButton {
+	float: left;
+	padding: 5px 20px;
+	background-color: #375A78;
+	color: #FFFFFF;
+	font-size: 130%;
+	margin: 35px 0;
+	margin-right: 10px;
+}
+
+.log_reg h2{
+	text-align: left;
+}
+
+.log_reg span {
+	color: red;
+}
+
+.paypal_btn {
+	float: right;
+	display: block;
+	cursor: pointer;
+	padding: 15px 20px;
+	background-color: #375A78;
+	color: #FFFFFF;
+	font-size: 110%;
+	margin-top: 30px;
+	margin-right: 30px;
+	margin-bottom: 30px;
+}
+
+.paypal_btn:hover {
+	background-color: #375A98;
+}
+
+.back {
+	float: left;
+	display: block;
+	cursor: pointer;
+	background-color: #375A89;
+	color: #FFFFFF;
+	padding: 10px 15px;
+	margin-left: 20px;
+	margin-top: 35px;
+	text-decoration: none;
+}
+
+.loading{
+	background: url(../images/loading.gif) no-repeat;
+	width: 50px;
+	height: 50px;
+	margin-top: 20%;
+	margin-left: 45%;
+}
+
+#_paypal {
+	display: none;
+}
+
+.load {
+	text-align: center;	
+}
+
+
+.dn{
+	display: none;
+}
+
+
+#contact_us {
+	float: left;
+}
+
+.contact_form {
+	text-align: left;
+}
+
+.contact_form input{
+	border: 1px solid #000000;
+	width: 300px;
+	height: 30px;
+	font-size: 90%;
+}
+
+
+#message h2 {
+	font-size: 130%;
+	text-align: center;
+}
+
+#message p {
+	text-align: center;
+}
+
+/** Paging **/
+
+.paging {
+	background-color: #EFEFEF;
+	list-style: none;
+	margin-top: 30px;
+	padding: 10px;
+}
+
+.paging li {
+	float: left;
+	margin-right: 10px;
+	
+}
+
+.paging a:hover {
+	color: #929292;
+	text-decoration: none;
+}
+
+.paging span {
+	color: #929292;
+	text-decoration: none;
+}
+
+#map-canvas {
+	width: 400px;
+	height: 300px;
+}

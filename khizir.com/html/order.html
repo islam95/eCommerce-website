@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Khizir Store</title>
+	<meta name="Author" content="Islam Dudaev" />
+	<meta name="description" content="Khizir online shop for clothing." />
+	<meta name="keywords" content="online shop, online store, khizir store, khizir shop" />
+	<link href="../css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div id="mainWrapper">
+		<header>
+			<!-- This contains Logo and links -->
+			<div id="logo">
+				<a href="./index.html">
+					<img src="./img/logo.gif" alt="Khizir Store" />
+				</a>
+			</div>
+
+			<!-- Search field -->
+			<div id="search">
+				<form name="search" action="#" method="get">
+					<!-- Search field. Javascript used for deleting the search text in search field when user types in. -->
+					<input type="text" name="q" value="Search..." onfocus="if(this.value == 'Search...'){this.value = '';}" onblur="if(this.value == ''){this.value = 'Search...';}" />
+				</form>
+			</div>
+
+			<div id="headerLinks"><a href="#" title="Login/Register">Login/Register</a><a href="#" title="Cart">Basket</a>
+			</div>
+		</header>
+
+		<section id="offer">
+			<!-- The offer section displays a banner text for promotions -->
+			<h1>OFFER 50%</h1>
+			<p>REALLY AWESOME DISCOUNTS THIS JULY</p>
+		</section>
+
+		<nav>
+			<!-- This contains main navigation bar of the website -->
+			<ul>
+				<li><a href="./index.html">HOME</a>
+				</li>
+				<li><a href="#">MEN</a>
+				</li>
+				<li><a href="#">WOMEN</a>
+				</li>
+				<li><a href="#">ELSE</a>
+				</li>
+				<li><a href="#">ABOUT</a>
+				</li>
+				<li><a href="#">DELIVERY</a>
+				</li>
+				<li><a href="#">CONTACT</a>
+				</li>
+			</ul>
+		</nav>
+
+		<div id="content">
+			<div class="sidebar">
+				<!-- This adds a sidebar -->
+				<div id="menubar">
+					<div class="menu">
+						<h1> Categories </h1>
+						<hr>
+						<ul>
+							<!-- List of links under menuset 1 -->
+							<li><a href="#" title="Link">Link 1</a>
+							</li>
+							<li><a href="#" title="Link">Link 2</a>
+							</li>
+							<li><a href="#" title="Link">Link 3</a>
+							</li>
+							<li class="notimp">
+								<!-- notimp class is applied to remove this link from the tablet and phone views --><a href="#" title="Link">Link 4</a>
+							</li>
+						</ul>
+					</div>
+					<div class="menu">
+						<h1>MENU ITEM 2 </h1>
+						<!-- Title for menuset 2 -->
+						<hr>
+						<ul>
+							<!--List of links under menuset 2 -->
+							<li><a href="#" title="Link">Link 1</a>
+							</li>
+							<li><a href="#" title="Link">Link 2</a>
+							</li>
+							<li><a href="#" title="Link">Link 3</a>
+							</li>
+							<li class="notimp">
+								<!-- notimp class is applied to remove this link from the tablet and phone views --><a href="#" title="Link">Link 4</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="mainContent">
+				<div id="order">
+					<h2>Shipping address</h2>
+					<form name="order" action="#" method="post">
+						<table>
+							<tr>
+								<td>
+									<p>Full Name</p>
+									<input type="text" name="fullName" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>Address (line 1)</p>
+									<input type="text" name="address1" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>Address (line 2)</p>
+									<input type="text" name="address2" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>City</p>
+									<input type="text" name="city" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>Postcode</p>
+									<input type="text" name="postcode" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>Phone number</p>
+									<input type="text" name="phone" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>E-mail</p>
+									<input type="text" name="email" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>Delivery method</p>
+									<select name="delivery">
+										<option value="">Standard - Free</option>
+										<option value="2">Royal Mail (first class) - £3.50</option>
+										<option value="3">Royal Mail (second class) - £1.50</option>
+										<option value="4">DHL International - £15</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<p>Comment:</p>
+									<textarea name="address" cols="80" rows="6"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="button">
+									<input type="image" src="img/order.png" alt="Order" onmouseover="this.src='img/order_active.png'" onmouseout="this.src='img/order.png'" /> 
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+		<footer>
+			<!-- This is the footer -->
+			<div id="left">
+				<p>Payment methods: </p>
+				<p>Copyright &copy; <a href="index.html">Khizir.com</a>| All rights reserved.</p>
+			</div>
+			<div id="right">
+				<p><a href="#" title="Link">Delivery</a>
+				</p>
+				<p><a href="#" title="Link">Shipping</a>
+				</p>
+				<p><a href="#" title="Link">Contact</a>
+				</p>
+				<p><a href="#" title="Link">Contact</a>
+				</p>
+				
+				
+				<p>
+					<a href="http://jigsaw.w3.org/css-validator/check/referer">
+						<img style="border:0;width:88px;height:31px; float:right"
+							src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+							alt="Valid CSS!" />
+					</a>
+				</p>
+			</div>
+		</footer>
+	</div>
+</body>
+
+</html>
