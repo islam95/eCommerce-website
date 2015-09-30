@@ -8,38 +8,43 @@ class DB {
 	private $connectToDB = false;
 	
 	public $id;
-	public $insert_keys = array();
+	// for inserting records to the database.
+	public $insert_keys = array(); 
 	public $insert_values = array();
+	// for updating records.
 	public $update_records = array();
+
 	public $last_query = null;
-	public $affected_rows = 0;
+	public $affected_rows = 0; 
 	
 	
-	
+	// Constructor of this class. Executed automatically when this class is instantiated
 	public function __construct() {
-		$this->connect();
+		$this->connect(); // connecting to the database.
 	}
 	
 	private function connect() {
 		$this->connectToDB = mysql_connect($this->db_host, $this->db_user, $this->db_password);
 		
 		if (!$this->connectToDB) {
-			die("Database connection error!<br />" . mysql_error());
+			die("Database connection error!<br><br>" . mysql_error());
 		} else {
 			$select = mysql_select_db($this->db_name, $this->connectToDB);
 			if (!$select) {
-				die("Database selection error!<br />" . mysql_error());
+				die("Database selection error!<br><br>" . mysql_error());
 			}
 		}
 		mysql_set_charset("utf8", $this->connectToDB);
 	}
 	
+	// closing the connection
 	public function close() {
 		if (!mysql_close($this->connectToDB)) {
 			die("Closing connection failed.");
 		}
 	}
 	
+	// To escape all illegal characters for interacting with the database.
 	public function escape($value) {
 		if(function_exists("mysql_real_escape_string")) {
 			if (get_magic_quotes_gpc()) {
@@ -63,8 +68,8 @@ class DB {
 	
 	public function displayQuery($result) {
 		if(!$result) {
-			$print  = "Database query failed: ". mysql_error() . "<br />";
-			$print .= "SQL query was: ".$this->last_query;
+			$print  = "Database query failed: ". mysql_error() . "<br>";
+			$print .= "Last SQL query was: ".$this->last_query;
 			die($print);
 		} else {
 			$this->affected_rows = mysql_affected_rows($this->connectToDB);
