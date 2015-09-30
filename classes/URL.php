@@ -2,24 +2,25 @@
 class URL {
 
 	public static $folder = PAGES_FOLDER;
-	public static $page = "page";
+	public static $page = "page"; // key word for identifying the loading page 
 	public static $params = array();
 	
+	// returning the url
 	public static function getParameter($param) {
 		return isset($_GET[$param]) && $_GET[$param] != "" ?
 				$_GET[$param] : null;
-		
 	}
 	
+	// Return current page
 	public static function currentPage() {
 		return isset($_GET[self::$page]) ? 
 				$_GET[self::$page] : 'index';
 	}
 	
 	public static function getPage() {
-		$currentPage = self::$folder.DIR_SEP.self::currentPage().".php";
+		$curPage = self::$folder.DIR_SEP.self::currentPage().".php";
 		$error = self::$folder.DIR_SEP."error.php";
-		return is_file($currentPage) ? $currentPage : $error;
+		return is_file($curPage) ? $curPage : $error;
 	}
 	
 	public static function getAll() {

@@ -1,4 +1,4 @@
 <?php
-require_once('include/load.php');
-$main = new Main();
-$main->run();
+require_once('include/autoload.php');
+$main = new Main(); // instantiating the Main class.
+$main->run(); // calls run method.

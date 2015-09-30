@@ -1,9 +1,11 @@
 <?php
+// start session.
 if(!isset($_SESSION)) {
 	session_start();
 }
 
-// Website domain name with http.
+// Check if it is defined do nothing, otherwise define the constant.
+// Website domain name with http. 
 defined("WEBSITE_URL") || define("WEBSITE_URL", "http://".$_SERVER['SERVER_NAME']);
 	
 // Directory separator.
