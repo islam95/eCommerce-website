@@ -1,13 +1,13 @@
 <?php
 class Basket {
 	
-	public $productDir;
+	public $products;
 	public $emp;
 	public $numOfItems;
 	public $totalValue;
 	
 	public function __construct() {
-		$this->productDir = new ProductDir();
+		$this->products = new Products();
 		$this->emp = empty($_SESSION['basket']) ? true : false;
 		
 		$this->numOfItems();
@@ -30,26 +30,28 @@ class Basket {
 		$value = 0;
 		if (!$this->emp) {
 			foreach($_SESSION['basket'] as $key => $items) {
-				$product = $this->productDir->getProduct($key);
+				$product = $this->products->getProduct($key);
 				$value += ($items['qty'] * $product['price']);	
 			}
 		}		
 		$this->totalValue = round($value, 2);
 	}
 	
-	
-	public static function active($session_id) {
+	// Method for the buttons: Add to basket and Remove.
+	public static function activeButton($session_id) {
 		if(isset($_SESSION['basket'][$session_id])) {
 			$id = 0;
+			$label = "Remove";
 		} else {
 			$id = 1;
+			$label = "Add to basket";
 		}
 		
-		$print  = "<a href=\"#\" class=\"addToBasket";
-		$print .= $id == 0 ? " removeB" : " buyB";
+		$print  = "<a href=\"#\" class=\"add_to_basket";
+		$print .= $id == 0 ? " red" : null;
 		$print .= "\" rel=\"";
 		$print .= $session_id."_".$id;
-		$print .= "\"></a>";
+		$print .= "\">{$label}</a>";
 		return $print;
 	}
 	

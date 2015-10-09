@@ -20,11 +20,11 @@ if($token2 == Login::encrypt($token)){
 		if(!empty($order) && !empty($products)){
 			
 			$newBasket = new Basket();
-			$productDir = new ProductDir();
+			$products = new Products();
 			$newPayPal = new PayPal();
 			
 			foreach($products as $product){
-				$item = $productDir->getProduct($product['product']);
+				$item = $products->getProduct($product['product']);
 				$newPayPal->addProduct($product['product'], $item['name'], $product['price'], $product['qty']);
 			}
 			

@@ -1,5 +1,5 @@
 <?php
-require_once('../include/load.php');
+require_once('../include/autoload.php');
 
 if (isset($_POST['qty']) && isset($_POST['id'])) {
 	
@@ -7,8 +7,8 @@ if (isset($_POST['qty']) && isset($_POST['id'])) {
 	$id = $_POST['id'];
 	$number = $_POST['qty'];
 	
-	$productDir = new ProductDir();
-	$product = $productDir->getProduct($id);
+	$products = new Products();
+	$product = $products->getProduct($id);
 	
 	if (!empty($product)) {
 		

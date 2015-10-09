@@ -6,9 +6,9 @@ $basket = new Basket();
 $productArray = array();
 
 if(!empty($session)){
-	$productDir = new ProductDir();
+	$objProducts = new Products();
 	foreach($session as $key => $value){
-		$productArray[$key] = $productDir->getProduct($key);
+		$productArray[$key] = $objProducts->getProduct($key);
 	}
 }
 	

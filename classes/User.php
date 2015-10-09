@@ -1,6 +1,6 @@
 <?php
 	
-class User extends DBinstance {
+class User extends Application {
 	
 	private $users = "users";
 	public $user_id;

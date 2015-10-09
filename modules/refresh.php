@@ -1,5 +1,5 @@
 <?php
-require_once("../include/load.php");
+require_once("../include/autoload.php");
 
 $basket = new Basket();
 

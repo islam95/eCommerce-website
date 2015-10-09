@@ -1,6 +1,6 @@
 <?php
 	
-class Order extends DBinstance {
+class Order extends Application {
 	
 	private $orders = 'orders';
 	private $o_p = 'orders_products';
@@ -18,10 +18,10 @@ class Order extends DBinstance {
 		
 		if(!empty($this->basket)){
 			
-			$productDir = new ProductDir();
+			$products = new Products();
 			
 			foreach($this->basket as $key => $value){
-				$this->products[$key] = $productDir->getProduct($key);
+				$this->products[$key] = $products->getProduct($key);
 			}
 		}
 	}

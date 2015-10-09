@@ -1,5 +1,5 @@
 <?php
-require_once('../include/load.php');
+require_once('../include/autoload.php');
 	
 	
 $session = Session::getSession('basket');
@@ -9,9 +9,9 @@ $basket = new Basket();
 $productArray = array();
 
 if(!empty($session)){
-	$productDir = new ProductDir();
+	$products = new Products();
 	foreach($session as $key => $value){
-		$productArray[$key] = $productDir->getProduct($key);
+		$productArray[$key] = $products->getProduct($key);
 	}
 }
 	

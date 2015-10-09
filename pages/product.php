@@ -3,11 +3,11 @@
 	$id = URL::getParameter('id');
 	
 	if(!empty($id)){
-		$productDir = new ProductDir();
-		$product = $productDir->getProduct($id);
+		$objProducts = new Products();
+		$product = $objProducts->getProduct($id);
 		
 		if(!empty($product)){
-			$category = $productDir->getCategory($product['category']);
+			$category = $objProducts->getCategory($product['category']);
 			require_once('header.php');
 			include_once("offerSection.php");
 			require_once('navigation.php');

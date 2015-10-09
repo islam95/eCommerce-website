@@ -6,13 +6,13 @@ if(empty($cat)){
 	require_once("error.php");
 } else {
 	
-	$objProductDir = new ProductDir();
-	$category = $objProductDir->getCategory($cat);
+	$objProducts = new Products();
+	$category = $objProducts->getCategory($cat);
 	
 	if(empty($category)){
 		require_once("error.php");
 	} else{
-		$rows = $objProductDir->getProducts($cat);
+		$rows = $objProducts->getProducts($cat);
 		
 		$paging = new Paging($rows);
 		$rows = $paging->getRecords();
@@ -47,7 +47,7 @@ if(empty($cat)){
 ?>
 			
 			<?php
-				$image = !empty($row['image']) ? $objProductDir->path.$row['image'] : 'images/ImageUnavailable.png';
+				$image = !empty($row['image']) ? $objProducts->path.$row['image'] : 'images/ImageUnavailable.png';
 			
 			?>
 					
@@ -64,9 +64,9 @@ if(empty($cat)){
 						</a>
 					</p>
 					<p class="price">
-						<?php echo ProductDir::$currency; echo number_format($row['price'], 2); ?>
+						<?php echo Products::$currency; echo number_format($row['price'], 2); ?>
 					</p>
-					<p><?php echo Basket::active($row['id']); ?></p>
+					<p><?php echo Basket::activeButton($row['id']); ?></p>
 					
 				</div>
 			

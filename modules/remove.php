@@ -1,6 +1,6 @@
 <?php
 
-require_once('../include/load.php');
+require_once('../include/autoload.php');
 
 if(isset($_POST['id'])){
 	

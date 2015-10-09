@@ -1,6 +1,6 @@
 <?php
-$objProductDir = new ProductDir();
-$cats = $objProductDir->getCategories();
+$objProducts = new Products();
+$cats = $objProducts->getCategories();
 	
 $objCompany = new Company();
 $company = $objCompany->getCompany();	
@@ -15,6 +15,7 @@ $company = $objCompany->getCompany();
 	<meta name="description" content="Khizir online shop for clothing." />
 	<meta name="keywords" content="online shop, online store, khizir store, khizir shop" />
 	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<link href="css/buttons.css" rel="stylesheet" type="text/css">
 </head>
 	
 

@@ -2,10 +2,10 @@
 	
 $cat = URL::getParameter('category');
 
-$productDir = new ProductDir();
+$objProducts = new Products();
 
-$products = $productDir->getAllProducts();
-$category = $productDir->getCategory($cat);
+$products = $objProducts->getAllProducts();
+$category = $objProducts->getCategory($cat);
 
 
 if(empty($products)){
@@ -30,7 +30,7 @@ if(empty($products)){
 <?php
 	foreach($products as $product){
 
-		$image = !empty($product['image']) ? $productDir->path.$product['image'] : 'images/ImageUnavailable.png';	
+		$image = !empty($product['image']) ? $objProducts->path.$product['image'] : 'images/ImageUnavailable.png';	
 ?>	
 		<div class="productInfo">
 			
@@ -45,9 +45,9 @@ if(empty($products)){
 				</a>
 			</p>
 			<p class="price">
-				<?php echo ProductDir::$currency; echo number_format($product['price'], 2); ?>
+				<?php echo Products::$currency; echo number_format($product['price'], 2); ?>
 			</p>
-			<p><?php echo Basket::active($product['id']); ?></p>
+			<p><?php echo Basket::activeButton($product['id']); ?></p>
 			
 		</div>
 		

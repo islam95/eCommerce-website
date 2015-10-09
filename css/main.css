@@ -274,13 +274,13 @@ nav a:hover {
 }
 /* Buy button for products in catalog */
 
-.productRow .productInfo .addToBasket{
+/*.productRow .productInfo .addToBasket{
 	display: block;
 	width: 108px;
 	height: 35px;
 	position: relative;
 	margin-left: 30px;
-}
+}*/
 .productRow .productInfo .buyB {
 	background: url("../images/add_To_Cart.jpg") no-repeat;
 }

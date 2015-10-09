@@ -1,5 +1,5 @@
 <?php
-class Discount extends DB_instance {
+class Discount extends Application {
 	
 	private $table = 'discounts';
 	

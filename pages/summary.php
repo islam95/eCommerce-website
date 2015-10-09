@@ -12,10 +12,10 @@ $productArray = array();
 $session = Session::getSession('basket');
 
 if(!empty($session)){
-	$products = new ProductDir();
+	$objProducts = new Products();
 	
 	foreach($session as $key => $value){
-		$productArray[$key] = $products->getProduct($key);
+		$productArray[$key] = $objProducts->getProduct($key);
 	}
 }
 

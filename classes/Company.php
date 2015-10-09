@@ -1,5 +1,5 @@
 <?php
-class Company extends DBinstance {
+class Company extends Application {
 	
 	private $table = 'company';
 	
@@ -9,6 +9,6 @@ class Company extends DBinstance {
 		return $this->db->getOneRecord($sql);
 	}
 	
-	
+
 	
 }

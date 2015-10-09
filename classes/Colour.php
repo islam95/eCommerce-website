@@ -1,6 +1,6 @@
 <?php
 	
-class Colour extends DBinstance{
+class Colour extends Application{
 	
 	
 	public function getColours(){
