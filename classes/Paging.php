@@ -2,7 +2,7 @@
 
 class Paging {
 
-	private static $paging = 'paging';
+	private static $paging = 'pg';
 
 	private $numPages;
 	private $numRecords;
@@ -12,6 +12,7 @@ class Paging {
 	private $records;
 	private $offset = 0;
 	
+	// Displaying 9 products per page.
 	public function __construct($rows, $max = 9){
 		$this->records = $rows;
 		$this->numRecords = count($this->records);
@@ -23,12 +24,11 @@ class Paging {
 		$this->getOffset();
 	}	
 
-
 	public function getRecords(){
 		$arr = array();
 		if($this->numPages > 1){
-			$last = ($this->offset + $this->maximum);
-
+			//Finding the last record on a specific page
+			$last = ($this->offset + $this->maximum); // e.g. 0 + 10 = 10
 			for($i = $this->offset; $i < $last; $i++){
 				if($i < $this->numRecords){
 					$arr[] = $this->records[$i];
@@ -40,17 +40,13 @@ class Paging {
 		return $arr;
 	}
 
-
 	private function numOfPages(){
 		$this->numPages = ceil($this->numRecords / $this->maximum);
-
 	}
-
 
 	private function getOffSet(){
 		$this->offset = ($this->currentPage - 1) * $this->maximum;
 	}
-
 
 	private function pagingLinks(){
 		if($this->numPages > 1){
@@ -79,8 +75,9 @@ class Paging {
 			}
 
 			// next page
+			// if we are not on last page
 			if($this->currentPage != $this->numPages){
-				$id = ($this->currentPage + 1);
+				$id = ($this->currentPage + 1); // next page number
 
 				$currentURL = $this->url."&amp;".self::$paging."=".$id;
 				$arr[] = "<a href=\"{$currentURL}\">Next</a>";
@@ -101,18 +98,15 @@ class Paging {
 		}
 	}
 
-
-
 	public function getPaging(){
 		$pages = $this->pagingLinks();
 		if(!empty($pages)){
-			$print = "<ul class=\"paging\">";
+			$print  = "<ul class=\"pg\">";
 			$print .= $pages;
 			$print .= "</ul>";
 			return $print;
 		}
 	}
-
 
 
 }

@@ -14,6 +14,7 @@ if(empty($cat)){
 	} else{
 		$rows = $objProducts->getProducts($cat);
 		
+		//instantiate paging class
 		$paging = new Paging($rows);
 		$rows = $paging->getRecords();
 

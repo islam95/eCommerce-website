@@ -33,6 +33,7 @@ class URL {
 		}
 	}
 	
+	// This function basically will return url something like: /?page=about
 	public static function getURL($remove = null){
 		
 		self::getAll();

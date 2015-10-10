@@ -183,7 +183,7 @@ nav a:hover {
 }
 /* main content of the site ---------------------------------------*/
 
-#content .mainContent, .paging {
+#content .mainContent, .pg {
 	float: left;
 	width: 75%;
 	text-align: center;
@@ -983,25 +983,25 @@ footer #right  {
 
 /** Paging **/
 
-.paging {
+.pg {
 	background-color: #EFEFEF;
 	list-style: none;
 	margin-top: 30px;
 	padding: 10px;
 }
 
-.paging li {
+.pg li {
 	float: left;
 	margin-right: 10px;
 	
 }
 
-.paging a:hover {
+.pg a:hover {
 	color: #929292;
 	text-decoration: none;
 }
 
-.paging span {
+.pg span {
 	color: #929292;
 	text-decoration: none;
 }
