@@ -981,31 +981,6 @@ footer #right  {
 	text-align: center;
 }
 
-/** Paging **/
-
-.pg {
-	background-color: #EFEFEF;
-	list-style: none;
-	margin-top: 30px;
-	padding: 10px;
-}
-
-.pg li {
-	float: left;
-	margin-right: 10px;
-	
-}
-
-.pg a:hover {
-	color: #929292;
-	text-decoration: none;
-}
-
-.pg span {
-	color: #929292;
-	text-decoration: none;
-}
-
 #map-canvas {
 	width: 400px;
 	height: 300px;

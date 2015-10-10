@@ -82,7 +82,7 @@
 					</td>
 					<td>
 						<p>
-						<?php echo Basket::active($product['id']); ?>
+						<?php echo Basket::activeButton($product['id']); ?>
 						</p>
 					</td>
 				</tr>

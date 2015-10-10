@@ -48,15 +48,16 @@ class Paging {
 		$this->offset = ($this->currentPage - 1) * $this->maximum;
 	}
 
+	// Links for pages.
 	private function pagingLinks(){
 		if($this->numPages > 1){
 			$arr = array();
 
 			// first page
 			if($this->currentPage > 1){
-				$arr[] = "<a href=\"".$this->url."\">First</a>";
+				$arr[] = "<a class=\"active_page\" href=\"".$this->url."\">First</a>";
 			} else {
-				$arr[] = "<span>First</span>";
+				$arr[] = "<span class=\"disabled\">First</span>";
 			}
 
 			// previous link
@@ -68,10 +69,10 @@ class Paging {
 				$currentURL = $id > 1 ?
 					$this->url."&amp;".self::$paging."=".$id :
 					$this->url;
-				$arr[] = "<a href=\"{$currentURL}\">Previous</a>";
+				$arr[] = "<a class=\"active_page\" href=\"{$currentURL}\">Previous</a>";
 
 			} else{
-				$arr[] = "<span>Previous</span>";
+				$arr[] = "<span class=\"disabled\">Previous</span>";
 			}
 
 			// next page
@@ -80,17 +81,17 @@ class Paging {
 				$id = ($this->currentPage + 1); // next page number
 
 				$currentURL = $this->url."&amp;".self::$paging."=".$id;
-				$arr[] = "<a href=\"{$currentURL}\">Next</a>";
+				$arr[] = "<a class=\"active_page\" href=\"{$currentURL}\">Next</a>";
 			} else{
-				$arr[] = "<span>Next</span>";
+				$arr[] = "<span class=\"disabled\">Next</span>";
 			}
 
 			// last page
 			if($this->currentPage != $this->numPages){
 				$currentURL = $this->url."&amp;".self::$paging."=".$this->numPages;
-				$arr[] = "<a href=\"{$currentURL}\">Last</a>";
+				$arr[] = "<a class=\"active_page\" href=\"{$currentURL}\">Last</a>";
 			} else {
-				$arr[] = "<span>Last</span>";
+				$arr[] = "<span class=\"disabled\">Last</span>";
 			}
 
 
