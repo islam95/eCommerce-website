@@ -2,7 +2,7 @@
 
 class Products extends Application {
 
-	private $table = 'categories';
+	private $categories = 'categories';
 	private $products = 'products';
 
 	public $path = 'images/products/';
@@ -11,14 +11,14 @@ class Products extends Application {
 	
 	// Returns the list of categories ordered alphabetically
 	public function getCategories() {
-		$sql = "SELECT * FROM `{$this->table}`
+		$sql = "SELECT * FROM `{$this->categories}`
 				ORDER BY `name` ASC";
 		return $this->db->getAllRecords($sql);
 	}
 	
 	// Returns the category name
 	public function getCategory($id){
-		$sql = "SELECT * FROM `{$this->table}`
+		$sql = "SELECT * FROM `{$this->categories}`
 				WHERE `id` = '".$this->db->escape($id)."'";
 		return $this->db->getOneRecord($sql);
 	}

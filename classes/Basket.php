@@ -2,39 +2,40 @@
 class Basket {
 	
 	public $products;
-	public $emp;
-	public $numOfItems;
-	public $totalValue;
+	public $empty_basket;
+	public $num_of_items;
+	public $total_value;
 	
 	public function __construct() {
 		$this->products = new Products();
-		$this->emp = empty($_SESSION['basket']) ? true : false;
+		// is basket empty or not?
+		$this->empty_basket = empty($_SESSION['basket']) ? true : false;
 		
 		$this->numOfItems();
 		$this->total();
-		
 	}
 	
+	// Number of items in the basket
 	public function numOfItems() {
 		$value = 0;
-		if (!$this->emp) {
+		if (!$this->empty_basket) {
 			foreach($_SESSION['basket'] as $key => $items) {
-				$value += $items['qty'];
+				$value += $items['qty']; //number of items in the basket
 			}
 		}
-		$this->numOfItems = $value;
+		$this->num_of_items = $value;
 	}
 	
-	
+	// Total value of the items in the basket.
 	public function total() {
 		$value = 0;
-		if (!$this->emp) {
+		if (!$this->empty_basket) {
 			foreach($_SESSION['basket'] as $key => $items) {
 				$product = $this->products->getProduct($key);
 				$value += ($items['qty'] * $product['price']);	
 			}
 		}		
-		$this->totalValue = round($value, 2);
+		$this->total_value = round($value, 2);
 	}
 	
 	// Method for the buttons: Add to basket and Remove.
@@ -48,7 +49,7 @@ class Basket {
 		}
 		
 		$print  = "<a href=\"#\" class=\"add_to_basket";
-		$print .= $id == 0 ? " red" : null;
+		$print .= $id == 0 ? " remove_btn" : null;
 		$print .= "\" rel=\"";
 		$print .= $session_id."_".$id;
 		$print .= "\">{$label}</a>";
@@ -75,11 +76,12 @@ class Basket {
    	}
 
 
-	
-	
-	
-	
-	
-	
+
 
 }
+
+
+
+
+
+

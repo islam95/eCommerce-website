@@ -1,16 +1,16 @@
 <?php
 require_once('../include/autoload.php');
 	
-if(isset($_POST['id']) && isset($_POST['job'])){
+if(isset($_POST['job']) && isset($_POST['id'])){
 	
 	$print = array();
-	$id = $_POST['id'];
 	$job = $_POST['job'];
+	$id = $_POST['id'];
 	
 	$products = new Products();
 	$product = $products->getProduct($id);
 	
-	
+	// If the product has been found
 	if(!empty($product)){
 		
 		switch($job){
@@ -27,7 +27,7 @@ if(isset($_POST['id']) && isset($_POST['job'])){
 			
 		}
 		
-		echo json_encode($print);
+		echo json_encode($print); // converts normal php array to javascript array.
 		
 	} 
 	

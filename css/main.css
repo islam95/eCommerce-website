@@ -3,8 +3,7 @@
 	File:		main.css
 	Author:		Islam Dudaev
 	Date:		2 February, 2015
-	Modified:	3 April, 2015
-	Version:	1.4
+	Version:	2.5  11 Oct, 2015
 */
 
 
@@ -16,7 +15,7 @@
 	width: 80%;
 	padding-left: 10%;
 }
-/* Header ----------------------------------------------------------------------------------------*/
+/* Header ------------------------------------------------------------------------*/
 
 header {
 	font-size: 16px;
@@ -230,7 +229,7 @@ nav a:hover {
 	font-weight: bold;
 	text-decoration: none;
 }
-/* Product rows for catalog ------------------------------*/
+/* Product rows for catalogue ------------------------------*/
 
 #content .mainContent .productRow {
 	overflow: hidden;
@@ -263,40 +262,16 @@ nav a:hover {
 
 .productRow .productInfo .productContent a {
 	position: relative;
+	color: #000000;
 	text-decoration: none;
-	font-size: 12px;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: 200;
 }
 
-.productContent a:hover {
-	color: #ADA9A9;
+.productRow .productInfo .productContent a:hover {
+	color: #1976D9;
 }
-/* Buy button for products in catalog */
-
-/*.productRow .productInfo .addToBasket{
-	display: block;
-	width: 108px;
-	height: 35px;
-	position: relative;
-	margin-left: 30px;
-}*/
-.productRow .productInfo .buyB {
-	background: url("../images/add_To_Cart.jpg") no-repeat;
-}
-
-.productRow .productInfo .buyB:hover {
-	background: url("../images/add_To_Cart2.jpg") no-repeat;
-}
-
-.productRow .productInfo .removeB {
-	background: url("../images/remove_Button1.png") no-repeat;
-}
-
-.productRow .productInfo .removeB:hover {
-	background: url("../images/remove_Button2.png") no-repeat;
-}
-
 
 /* footer ------------------------------------------------------------------------------------------*/
 
@@ -341,8 +316,8 @@ footer #right  {
 	padding-top: 15px;
 	text-align: right;
 }
-/* Media query for tablets -------------------------------------------------------------------------------*/
 
+/* Media query for tablets -----------------------------------------------------------------*/
 @media screen and (max-width: 800px) {
 	#search input {
 		width: 200px;
@@ -486,8 +461,8 @@ footer #right  {
 		padding-right: 35px;
 	}
 }
-/*media query for small screen devices ----------------------------------------------------------------------*/
 
+/* Media query for small screen devices ----------------------------------------------------*/
 @media screen and (max-width: 480px) {
 	/* Logo and search */
 	
@@ -577,7 +552,7 @@ footer #right  {
 	}
 }
 
-/* Product page */
+/* Product page ----------------------------------------------------------------------------*/
 
 /* Horizontal navigation arrow */ 
 .mainContent #navArrow {
@@ -633,29 +608,6 @@ footer #right  {
 #product .choose td{
 	padding-top: 20px;
 }
-
-#product .choose .addToBasket {
-	display: block;
-	width: 108px;
-	height: 35px;
-}
-
-#product .choose .buyB {
-	background: url("../images/add_To_Cart.jpg") no-repeat;
-}
-
-#product .choose .buyB:hover {
-	background: url("../images/add_To_Cart2.jpg") no-repeat;
-}
-
-#product .choose .removeB {
-	background: url("../images/remove_Button1.png") no-repeat;
-}
-
-#product .choose .removeB:hover {
-	background: url("../images/remove_Button2.png") no-repeat;
-}
-
 
 #product p.info {
 	margin-top: 40px;
@@ -794,7 +746,7 @@ footer #right  {
 	text-align: center;
 }
 
-#basket_right {
+#basket_small {
 	font-size: 90%;
 }
 
@@ -803,7 +755,7 @@ footer #right  {
 	padding-right: 30px;
 }
 
-#basket_right .items, #basket_right .total{
+#basket_small .items, #basket_small .total{
 	float: right;
 }
 
@@ -985,3 +937,10 @@ footer #right  {
 	width: 400px;
 	height: 300px;
 }
+
+
+
+
+
+
+

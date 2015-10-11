@@ -2,15 +2,11 @@
 	
 class Session {
 
-
-
-
 	public static function setItem($id, $qty = 1) {
-		$_SESSION['basket'][$id]['qty'] = $qty;
+		// Creating a sesssion called basket with the id of the product and its quantity.
+		$_SESSION['basket'][$id]['qty'] = $qty; 
 	}
-	
-	
-	
+		
 	public static function removeItem($id, $qty = null) {
 		if ($qty != null && $qty < $_SESSION['basket'][$id]['qty']) {
 			$_SESSION['basket'][$id]['qty'] = ($_SESSION['basket'][$id]['qty'] - $qty);
@@ -20,22 +16,17 @@ class Session {
 		}
 	}
 	
-	
-	
 	public static function getSession($session = null){
 		if(!empty($session)){
 			return isset($_SESSION[$session]) ? $_SESSION[$session] : null;
 		}
 	}
 
-
 	public static function setSession($name = null, $value = null){
 		if(!empty($name) && !empty($value)){
 			$_SESSION[$name] = $value;
 		}
 	}
-
-
 
 
 

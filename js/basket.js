@@ -33,26 +33,26 @@ $(document).ready(function() {
 			data: ({ id: product }),
 			success: function() {
 				refreshCart();
-				refresh();
+				refreshSmallBasket();
 			}
 		});
 		return false;
 	}
 	
-	
-	function refresh() {
+	//Refreshing the small basket. Updates the content of small basket when add to basket or remove is clicked
+	function refreshSmallBasket() {
 		$.ajax({
-			url: 'modules/refresh.php',
+			url: 'modules/basket_small_refresh.php',
 			dataType: 'json',
-			
 			success: function (data) {
-				console.log(data); // checking if it works.
+				//console.log(data); // checking if it works.
 				$.each(data, function(k, v) {
-					$("#basket_right ." + k + " span").text(v);
+					// Fill in values in small basket - /modules/basket_small.php
+					$("#basket_small ." + k + " span").text(v);
 				});
 			},
 			error: function(data) {
-				alert("Error in refresh function.");
+				alert("Error in refreshSmallBasket function.");
 			}
 		});
 	
@@ -75,40 +75,42 @@ $(document).ready(function() {
 		
 	}
 	
-	
-	if ($(".addToBasket").length > 0) {
-		$(".addToBasket").click(function() {
+	// AJAX call for Add to basket and Remove buttons for updating small basket without reloading.
+	// Relates to a method activeButton() in Basket.php
+	if ($(".add_to_basket").length > 0) {
+		$(".add_to_basket").click(function() {
 			
-			var trigger = $(this);
-			var parameter = trigger.attr("rel");
-			var i = parameter.split("_");
+			var trigger = $(this); // assigning the Add to basket link to a trigger
+			var parameter = trigger.attr("rel"); // rel stores the session_id "_" and id that is generated for the buttons - Basket.php -> activeButton
+			var i = parameter.split("_"); // splitting the value populated from the rel attribute with the "_"
 			
 			$.ajax({
-				type: 'POST',
-				url: 'modules/basket.php',
+				type: 'POST', // sending the request to specific file using POST method
+				url: 'modules/basket.php', // the file to which we are sending this using POST 
 				dataType: 'json',
-				data: ({ id : i[0], job : i[1] }),
+				data: ({ id : i[0], job : i[1] }), // data that we are sending using POST
 				success: function(data) {
-					var newOne = i[0] + '_' + data.job;
+					//Relates to a method /modules/basket.php file.
+					var new_id = i[0] + '_' + data.job;
 					if (data.job != i[1]) {
 						if (data.job == 0) {
-							trigger.attr("rel", newOne);
-							trigger.removeClass("buyB");
-							trigger.addClass("removeB");
+							trigger.attr("rel", new_id);
+							trigger.text("Remove");
+							trigger.addClass("remove_btn");
 							
 						} else {
-							trigger.attr("rel", newOne);
-							trigger.removeClass("removeB");
-							trigger.addClass("buyB");
+							trigger.attr("rel", new_id);
+							trigger.text("Add to basket");
+							trigger.removeClass("remove_btn");
 						}
-						refresh();
+						refreshSmallBasket();
 					}
 				},
 				error: function(data) {
-					alert("Error..");
+					alert("Error occured in AJAX call for add_to_basket.");
 				}
 			});
-			return false;
+			return false; // so that the page does not scroll up or down when clicking the buttons
 			
 		});
 	}
@@ -125,7 +127,7 @@ $(document).ready(function() {
 				data: ({ id: qID[1], qty: number }),
 				success: function() {
 					console.log("If you see this then update() method works fine! ");
-					refresh();
+					refreshSmallBasket();
 					refreshCart();
 				},
 				error: function(){
@@ -175,4 +177,12 @@ $(document).ready(function() {
 	}
 	
 	
+
+	
 });
+
+
+
+
+
+
