@@ -1,11 +1,8 @@
 <?php
 require_once('../include/autoload.php');
-	
-	
+
 $session = Session::getSession('basket');
 $basket = new Basket();
-
-
 $productArray = array();
 
 if(!empty($session)){
@@ -19,12 +16,12 @@ if(!empty($session)){
 	
 <?php if (!empty($productArray)) { ?>	
 
-	<h2>Basket</h2>
+	<h2>Your basket</h2>
 	<form action="" method="post" id="basket_form">
 		<table>
 			<tr class="bold">
 				<th>Product</th>
-				<th>Name</th>
+				<th class="name">Name</th>
 				<th>Color</th>
 				<th>Size</th>
 				<th>Qty</th>
@@ -65,7 +62,11 @@ if(!empty($session)){
 				}
 			?>	
 				<td>
-					<input type="text" name="qty-<?php echo $product['id']; ?>" id="qty-<?php echo $product['id']; ?>" class="input_qty" value="<?php echo $session[$product['id']]['qty']; ?>" />
+					<!-- name and id = qty-product_id So that each row will have different name assigned to it
+						Used in js/basket.js file to update the total value of all products in the basket.
+					-->
+					<input type="text" name="qty-<?php echo $product['id']; ?>" id="qty-<?php echo $product['id']; ?>" 
+					class="input_qty" value="<?php echo $session[$product['id']]['qty']; ?>" />
 				</td>
 				<td>
 					&pound;<?php echo number_format($basket->priceByQty($product['price'], $session[$product['id']]['qty']), 2); ?>
@@ -82,13 +83,21 @@ if(!empty($session)){
 	<?php } ?>
 		
 			<tr>
-				<td colspan="7" class="total"><p>Total: <span>&pound;<?php echo number_format($basket->totalValue, 2); ?></span></p></td>
+				<td colspan="7" class="total">
+					<p>Total: <span>&pound;<?php echo number_format($basket->total_value, 2); ?></span></p>
+				</td>
 			</tr>
 		</table>
-
-		<div><p class="checkout"><a href="?page=checkout"></a></p></div>
+	
+		<!-- Checkout button -->
+		<div class="checkout">
+			<a href="?page=checkout" class="checkout_btn">Checkout &raquo;</a>
+		</div>
 		
-		<div><p class="update"></p></div>
+		<!-- Update the basket button -->
+		<div class="update_basket">
+			<span class="update_btn">Update</span>
+		</div>
 		
 	</form>
 

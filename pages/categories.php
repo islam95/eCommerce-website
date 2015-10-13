@@ -25,8 +25,8 @@ if(empty($cat)){
 
 ?>
 
-		
-		<table id="navArrow">
+		<!-- Display the path of the page on the website -->
+		<table class="navArrow">
 			<tr>
 				<td>
 					<a href="?page=index">Home</a>
@@ -48,6 +48,7 @@ if(empty($cat)){
 ?>
 			
 			<?php
+				// If there is no image for the particular product then show the image below
 				$image = !empty($row['image']) ? $objProducts->path.$row['image'] : 'images/ImageUnavailable.png';
 			
 			?>

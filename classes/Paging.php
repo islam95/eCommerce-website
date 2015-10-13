@@ -94,7 +94,6 @@ class Paging {
 				$arr[] = "<span class=\"disabled\">Last</span>";
 			}
 
-
 			return "<li>".implode("</li><li>", $arr)."</li>";
 		}
 	}

@@ -9,12 +9,12 @@
 		if(!empty($product)){
 			$category = $objProducts->getCategory($product['category']);
 			require_once('header.php');
-			include_once("offerSection.php");
+			require_once("offerSection.php");
 			require_once('navigation.php');
 			require_once('sidebar.php');
 ?>
-
-		<table id="navArrow">
+		<!-- Display the path of the page on the website -->
+		<table class="navArrow navProduct">
 			<tr>
 				<td>
 					<a href="?page=index">Home</a>
@@ -33,7 +33,8 @@
 				</td>
 			</tr>
 		</table>
-			
+	
+	<!-- Product information -->
 	<table id="product">
 		<tr>
 			<td>
@@ -99,23 +100,25 @@
 	</tr>
 	<tr>
 		<td>
-			<p><?php echo "<a href=\"javascript:history.go(-1)\">Go back</a>"; ?></p>
+			<p>
+				<?php
+					//Go back one page on click.
+					echo "<a class=\"go_back\" href=\"javascript:history.go(-1)\">&laquo; Back</a>"; 
+				?>
+			</p>
 		</td>
 	</tr>
 	</table>
 		
-
-
 <?php			
 			require_once('footer.php');
 		} else {
 			require_once('error.php');
 		}
 		
-		
-		
-		
 	
 	} else {
 		require_once('error.php');
 	}
+
+

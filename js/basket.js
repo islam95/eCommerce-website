@@ -1,34 +1,37 @@
 $(document).ready(function() {
 	
-	initialise();
+	// Execute this function when a document is loaded.
+	initialize();
 	
-	// methods for clicking update button or Enter key in a keyboard.
-	function initialise() {
+	// Method for clicking update button or Enter key in a keyboard.
+	// Initializing all the bindings: click bindings and key presses for specific element on the page. 
+	// Relates to css classes for update, remove and input quentity in pages/basket.php and classes/Basket.php
+	function initialize() {
 		// if there is such class.
-		if($('.removeItem').length > 0) {
-			$('.removeItem').bind('click', removeItem);
+		if($('.remove_item').length > 0) {
+			$('.remove_item').bind('click', removeFromBasket);
 		}
-		if($('.update').length > 0) {
-			$('.update').bind('click', update);
+		if($('.update_basket').length > 0) {
+			$('.update_basket').bind('click', updateBasket); // Once this element is clicked execute function "updateBasket"
 		}
 		if($('.input_qty').length > 0){
 			$('.input_qty').bind('keypress', function(element){
-				// For different browsers. Firefox uses "which"
+				// For different browsers. Firefox uses "which". Internet Explorer uses "keyCode"
 				var key = element.keyCode ? element.keyCode : element.which;
-				// 13 is "Enter" key in a keyboard.
+				// 13 is "Enter" key on a keyboard.
 				if (key == 13) {
-					update();
+					updateBasket();
 				}
 			});
 		}
 	}
 	
-	
-	function removeItem(){
+	// Method to remove the product from the basket after clicking the red cross
+	function removeFromBasket(){
 		var product = $(this).attr('rel');
 		$.ajax({
 			type:'POST',
-			url: 'modules/remove.php',
+			url: 'modules/basket_remove.php',
 			dataType: 'html',
 			data: ({ id: product }),
 			success: function() {
@@ -38,6 +41,32 @@ $(document).ready(function() {
 		});
 		return false;
 	}
+
+	// Method for updating the main basket after the change of the quantity in a basket.
+	function updateBasket(){
+		// for each loop
+		$('#basket_form input').each(function() {
+			// splits the name with "-" as in qty name in basket.php
+			// qty_id[1] - is the "id" of the product
+			var qty_id = $(this).attr('id').split('-'); // assign the "id" of "input" field
+			// populating the value from the "input" field in main basket
+			var value = $(this).val(); // the value that holds this: qty.
+			$.ajax({
+				type: 'POST',
+				url: 'modules/basket_qty.php',
+				// qty_id[1] - is the "id" of the product
+				data: ({ id: qty_id[1], qty: value }),
+				success: function() {
+					//console.log("If you see this then updateBasket() method works fine! ");
+					refreshSmallBasket();
+					refreshCart();
+				},
+				error: function(){
+					alert('ERROR in updateBasket() function!');
+				}
+			});
+		});
+	} 
 	
 	//Refreshing the small basket. Updates the content of small basket when add to basket or remove is clicked
 	function refreshSmallBasket() {
@@ -52,24 +81,25 @@ $(document).ready(function() {
 				});
 			},
 			error: function(data) {
-				alert("Error in refreshSmallBasket function.");
+				alert("Error in refreshSmallBasket() function.");
 			}
 		});
 	
 	}
 	
-	
 	// Viewing the main basket, it just views the basket using ajax, but does not store anything.
 	function refreshCart(){
 		$.ajax({
-			url: 'modules/view.php',
+			url: 'modules/basket_view.php',
 			dataType: 'html',
 			success: function(data) {
-				$('#cart').html(data);
-				initialise();
+				//Replace the current basket with the new one - modules/basket_view.php
+				$('#cart').html(data); //#cart - div in pages/basket.php that wraps the whole basket.
+				//assigning all the binding again after ajax call.
+				initialize();  //if we do not do this, user will not be able to do anything on the page.
 			},
 			error: function(data){
-				alert('Error in refreshCart function.')
+				alert('Error in refreshCart() function.')
 			}
 		});
 		
@@ -107,36 +137,13 @@ $(document).ready(function() {
 					}
 				},
 				error: function(data) {
-					alert("Error occured in AJAX call for add_to_basket.");
+					alert("Error occured in AJAX call for add_to_basket().");
 				}
 			});
 			return false; // so that the page does not scroll up or down when clicking the buttons
 			
 		});
 	}
-	
-	
-	function update(){
-		$('#basket_form input').each(function() {
-			// splits the name with "-" as in qty name in basket.
-			var qID = $(this).attr('id').split('-'); 
-			var number = $(this).val(); // the value that hold this: qty.
-			$.ajax({
-				type: 'POST',
-				url: 'modules/qty.php',
-				data: ({ id: qID[1], qty: number }),
-				success: function() {
-					console.log("If you see this then update() method works fine! ");
-					refreshSmallBasket();
-					refreshCart();
-				},
-				error: function(){
-					alert('ERROR in update function!');
-				}
-			});
-		});
-	}
-	
 	
 	// Proceeding to PayPal.
 	if($('.paypal').length > 0){
@@ -156,8 +163,6 @@ $(document).ready(function() {
 			
 		});
 	}
-
-	 
 	
 	function paypal(aToken){
 		$.ajax({
@@ -171,7 +176,7 @@ $(document).ready(function() {
 				$('.formPayPal').submit();	
 			},
 			error: function(){
-				alert("Error occurred in a paypal function.");
+				alert("Error occurred in a paypal() function.");
 			}
 		});
 	}

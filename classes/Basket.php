@@ -57,24 +57,26 @@ class Basket {
 	}
 	
 	
-
-   	public function priceByQty($price = null, $qty = null) {
-   		if (!empty($price) && !empty($qty)) {
-   			return round(($price * $qty), 2);
-   		}
-   	}
-   	
-   	
-   	public static function removeX($id = null) {
-   		if (!empty($id)) {
-   			if (isset($_SESSION['basket'][$id])) {
-   				$print  = "<a href=\"#\" class=\"removeItem removeX";
-   				$print .= "\" rel=\"{$id}\"></a>";
-   				return $print;
-   			}
-   		}
-   	}
-
+	// See pages/basket.php Used to calculate the total amount in main basket.
+	public function priceByQty($price = null, $qty = null) {
+		if (!empty($price) && !empty($qty)) {
+			return round(($price * $qty), 2); 
+		}
+	}
+	
+	// See pages/basket.php and removeFromBasket() in basket.js. 
+	// This red cross button removes the item from the main basket.
+	public static function removeX($id = null) {
+		if (!empty($id)) {
+			//If the product is in the basket 
+			if (isset($_SESSION['basket'][$id])) {
+				$print  = "<a href=\"#\" class=\"remove_item removeX";
+				$print .= "\" rel=\"{$id}\"></a>";
+				return $print;
+			}
+		}
+	}
+	
 
 
 

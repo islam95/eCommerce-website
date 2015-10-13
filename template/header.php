@@ -41,7 +41,7 @@ $company = $objCompany->getCompany();
 				<a href="?page=login" title="Login/Register">Login/Register</a>
 				<a href="?page=basket" title="Cart">Basket</a>
 				<a href="?page=basket" title="CartImg">
-					<img src="images/basket/basket.png" alt="Basket" class="imgBasket" />
+					<img src="images/basket.png" alt="Basket" class="imgBasket" />
 				</a>
 			</div>
 		</header>

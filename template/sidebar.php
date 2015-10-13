@@ -7,7 +7,7 @@
 				<h1> Categories </h1>
 				<hr>
 				<ul>
-					<!-- List of links  -->
+					<!-- List of categories  -->
 					<?php 
 						if(!empty($cats)){
 							foreach($cats as $cat) {
