@@ -1,7 +1,6 @@
 <?php
 	
-class Select {
-	
+class Form {
 	
 	public function isPost($field = null){
 		if(!empty($field)){
@@ -17,27 +16,22 @@ class Select {
 		}
 	}
 	
-	
+	// Used for security in forms, so that users cannot insert html and javascript code.
 	public function getPost($field = null){
 		if(!empty($field)){
+			// If the POST has been set (if form is submitted) remove any html tags for security reasons.
 			return $this->isPost($field) ? strip_tags($_POST[$field]) : null;
-			
 		}
 	}
 	
-	
-	
-	
 	public function selectField($field, $value, $default = null){
-		
+		// If the form has been submitted with the specified field name
 		if($this->isPost($field) && $this->getPost($field) == $value) {
 			return " selected=\"selected\"";
 		} else {
 			return !empty($default) && $default == $value ? " selected=\"selected\"" : null;
 		}
 	}
-	
-	
 	
 	public function textField($field, $value = null){
 		// stripslashes method used to avoid different kinds of characters in a
@@ -49,16 +43,61 @@ class Select {
 		}
 	}
 	
+	public function getSizeLetter($record = null){
+		$sizeObj = new Size();
+		$sizes = $sizeObj->getSizeLetters();
+		
+		if(!empty($sizes)){
+			$print = "<select name=\"size_letter\" id=\"size\" class=\"select_size\">";
+			
+			if(empty($record)){
+				$print .= "<option value=\"\">Select</option>";
+			}
+			foreach($sizes as $size){
+				$print .= "<option value=\"";
+				$print .= $size['id'];
+				$print .= "\"";
+				$print .= $this->selectField('size_letter', $size['id'], $record);
+				$print .= ">";
+				$print .= $size['size_letter'];
+				$print .= "</option>";
+			}
+			$print .= "</select>";
+			return $print;
+		}
+	}
 	
+	public function getSizeNumber($record = null){
+		$sizeObj = new Size();
+		$sizes = $sizeObj->getSizeNumbers();
+		
+		if(!empty($sizes)){
+			$print = "<select name=\"size_number\" id=\"size\" class=\"select_size\">";
+			
+			if(empty($record)){
+				$print .= "<option value=\"\">Select</option>";
+			}
+			foreach($sizes as $size){
+				$print .= "<option value=\"";
+				$print .= $size['id'];
+				$print .= "\"";
+				$print .= $this->selectField('size_number', $size['id'], $record);
+				$print .= ">";
+				$print .= $size['size_number'];
+				$print .= "</option>";
+			}
+			$print .= "</select>";
+			return $print;
+		}
+	}
 	
-	
-	// Colour table will be created in a database if I have time before submitting. Also size table.
+	// Method for getting colours from the database.
 	public function getColour($record = null){
 		$colourObject = new Colour();
 		$colours = $colourObject->getColours();
 		
 		if(!empty($colours)){
-			$print = "<select name=\"colour\" id=\"colour\" class=\"selectOption\">";
+			$print = "<select name=\"colour\" id=\"colour\" class=\"select_colour\">";
 			
 			if(empty($record)){
 				$print .= "<option value=\"\">Select</option>";
@@ -69,7 +108,7 @@ class Select {
 				$print .= "\"";
 				$print .= $this->selectField('colour', $colour['id'], $record);
 				$print .= ">";
-				$print .= $colour['name'];
+				$print .= $colour['colour'];
 				$print .= "</option>";
 			}
 			$print .= "</select>";

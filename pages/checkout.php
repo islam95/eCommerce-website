@@ -7,11 +7,11 @@ $user = $theUser->getUser(Session::getSession(Login::$user_login));
 
 if(!empty($user)){
 
-$select = new Select();
-$validation = new Valid($select);
+$form = new Form();
+$validation = new Valid($form);
 
 
-if ($select->isPost('first_name')) {
+if ($form->isPost('first_name')) {
 		
 	$validation->expect = array(
 		'first_name',
@@ -55,6 +55,7 @@ require_once('sidebar.php');
 
 <div id="order">
 	<h1>Checkout</h1>
+	<p>Please check your details and click <strong>Next</strong>.</p>
 	
 	<h2>Shipping address:</h2>
 	<br />
@@ -71,7 +72,7 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('first_name'); ?>
 					<input type="text" name="first_name" 
 					id="first_name" class="ship_input" 
-					value="<?php echo $select->textField('first_name', $user['first_name']); ?>" />
+					value="<?php echo $form->textField('first_name', $user['first_name']); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -82,7 +83,7 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('last_name'); ?>
 					<input type="text" name="last_name" 
 					id="last_name" class="ship_input" 
-					value="<?php echo $select->textField('last_name', $user['last_name']); ?>" />
+					value="<?php echo $form->textField('last_name', $user['last_name']); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -93,7 +94,7 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('address_1'); ?>
 					<input type="text" name="address_1" 
 					id="address_1" class="ship_input" 
-					value="<?php echo $select->textField('address_1', $user['address_1']); ?>" />
+					value="<?php echo $form->textField('address_1', $user['address_1']); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -104,7 +105,7 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('address_2'); ?>
 					<input type="text" name="address_2" 
 					id="address_2" class="ship_input" 
-					value="<?php echo $select->textField('address_2', $user['address_2']); ?>" />
+					value="<?php echo $form->textField('address_2', $user['address_2']); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -115,7 +116,7 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('city'); ?>
 					<input type="text" name="city" 
 					id="city" class="ship_input" 
-					value="<?php echo $select->textField('city', $user['city']); ?>" />
+					value="<?php echo $form->textField('city', $user['city']); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -126,7 +127,7 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('county'); ?>
 					<input type="text" name="county" 
 					id="county" class="ship_input" 
-					value="<?php echo $select->textField('county', $user['county']); ?>" />
+					value="<?php echo $form->textField('county', $user['county']); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -137,7 +138,7 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('post_code'); ?>
 					<input type="text" name="post_code" 
 					id="post_code" class="ship_input" 
-					value="<?php echo $select->textField('post_code', $user['post_code']); ?>" />
+					value="<?php echo $form->textField('post_code', $user['post_code']); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -148,7 +149,7 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('country'); ?>
 					<input type="text" name="country" 
 					id="country" class="ship_input" 
-					value="<?php echo $select->textField('country', $user['country']); ?>" />
+					value="<?php echo $form->textField('country', $user['country']); ?>" />
 				</td>
 			</tr>
 			<tr>
@@ -159,13 +160,13 @@ require_once('sidebar.php');
 					<?php echo $validation->warn('email'); ?>
 					<input type="text" name="email" 
 					id="email" class="ship_input" 
-					value="<?php echo $select->textField('email', $user['email']); ?>" />
+					value="<?php echo $form->textField('email', $user['email']); ?>" />
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<label for="button" class="button">
-					<input type="submit" id="button" class="aButton" value="Next" />
+					<label for="next" class="next">
+					<input type="submit" id="next" class="next_btn" value="Next" />
 					</label>
 				</td>
 			</tr>

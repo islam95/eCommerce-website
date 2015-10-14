@@ -58,7 +58,7 @@ require_once('sidebar.php');
 					<?php echo Check::encodeHTML($product['name']); ?>
 				</td>
 				
-				<td><?php echo $product['color']; ?></td>
+				<td><?php echo $product['colour']; ?></td>
 				
 			<?php 
 				if(!empty($product['size_number'])){

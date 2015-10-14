@@ -1,3 +1,5 @@
+-- Database: `khizir`
+
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
 	`id` INT(10) NOT NULL AUTO_INCREMENT,
@@ -77,12 +79,15 @@ CREATE TABLE `products` (
 	`date` DATETIME NOT NULL,
 	`category` INT(10) NOT NULL,
 	`image` VARCHAR(100) DEFAULT NULL,
-	`color` VARCHAR(100) DEFAULT NULL,
-	`size_number` VARCHAR(100) DEFAULT NULL, -- size for shoose or other: like 35,40,43, etc.
-	`size_letter` VARCHAR(100) DEFAULT NULL, -- size for clothes: like S, M, L, XXL, etc.
+	`colour` INT(10) DEFAULT NULL,
+	`size_number` INT(10) DEFAULT NULL, -- size for shoose or other: like 35,40,43, etc.
+	`size_letter` INT(10) DEFAULT NULL, -- size for clothes: like S, M, L, XXL, etc.
 	`brand` VARCHAR(100) DEFAULT NULL,
 	PRIMARY KEY (`id`),
-	FOREIGN KEY (`category`) REFERENCES `categories` (`id`)
+	FOREIGN KEY (`category`) REFERENCES `categories` (`id`),
+	FOREIGN KEY (`colour`) REFERENCES `colours` (`id`),
+	FOREIGN KEY (`size_number`) REFERENCES `size_numbers` (`id`),
+	FOREIGN KEY (`size_letter`) REFERENCES `size_letters` (`id`)
 );
 INSERT INTO `products` VALUES (1, 'Highwayman Bridge Coat', '<p>Layering is king when temperatures drop, and a chunky coat is integral to the winter assemble. The single-breasted overcoat provides a broad silhouette that’s long been a favourite of those who want premium protection from the elements.</p>
 <p>The Highwayman Bridge coat from Superdry is fitted with a one button fastening and twin side pockets that are the perfect place to keep your hands away out the cold. The centre vent provides a tailored silhouette, whilst the inner lining buzzes with flashes of blue.</p>
@@ -96,10 +101,10 @@ INSERT INTO `products` VALUES (1, 'Highwayman Bridge Coat', '<p>Layering is king
 	<li>Dual side pockets</li>
 	<li>Centre vent</li>
 </ul>
-<p>60% wool, 40% other fibres. Dry clean only.</p>', 100.00, '2015-04-24 23:34:23', 4, 'HighwaymanBridgeCoat.jpg', 'grey', NULL, 'M',  'Superdry');
+<p>60% wool, 40% other fibres. Dry clean only.</p>', 100.00, '2015-04-24 23:34:23', 4, 'HighwaymanBridgeCoat.jpg', 5, NULL, 4,  'Superdry');
 INSERT INTO `products` VALUES (2, 'Hi-Tec Waterproof Jacket', '<p>ONLINE EXCLUSIVE</p><p>Get set for this year’s outdoor adventures in this waterproof jacket from Hi-Tec. With a zipped pockets on the hip and a Hi-Tec logo on the chest, the jacket is made with TECPROOF technology with taped seams, a funnel neckline, covered placket and pack-away hood for warmth.</p>
 <p>Zip-through fastening with a riptape fastened placket</p>
-<p>Sits on the hip</p>', 40.00, '2015-04-24 12:34:23', 4,  'WaterproofJacket.png', 'blue', NULL, 'L', 'Hi-Tec');
+<p>Sits on the hip</p>', 40.00, '2015-04-24 12:34:23', 4,  'WaterproofJacket.png', 4, NULL, 5, 'Hi-Tec');
 INSERT INTO `products` VALUES (3, 'Petite Tea Dress', '<p>With a choice of two staple colours – this petite fit tea dress by South effortlessly takes you from week-to-weekend in classic style.</p>
 <p>This petite tea dress is a blend of sassy and sweet making it the perfect pick to see you from the office to the dance floor. The wrap style top makes the most of your feminine curves for a sleek silhouette, while the short-sleeved cut keeps you cool in the sunshine. Its cinched waist defines your shape and the flippy skirt is a flirty twist that stays classy in length!</p>
 <p>Wear this petite fit tea dress with block heeled sandals for a cute look on your next hot date.</p>
@@ -112,7 +117,7 @@ INSERT INTO `products` VALUES (3, 'Petite Tea Dress', '<p>With a choice of two s
 	<li>Short-sleeved</li>
 	<li>33 inch length</li>
 </ul>
-<p>95% viscose, 5% elastane. Machine washable.</p>', 8.20, '2015-04-24 13:34:12', 2, 'SouthPetiteTeaDress.png', 'navy', '16', NULL,  'South');
+<p>95% viscose, 5% elastane. Machine washable.</p>', 8.20, '2015-04-24 13:34:12', 2, 'SouthPetiteTeaDress.png', 3, 1, NULL,  'South');
 INSERT INTO `products` VALUES (4, 'Ella Skinny Jeans', '<p>Super-skinny in a choice of two washes, these Ella high rise skinny jeans from South perfectly complement your off-duty style.</p>
 <p>Skinny jeans are a style staple in every women’s wardrobe. These skinnies, with their high rise design, lend your legs supermodel length! In a super-soft fabric with a slight stretch they’re so comfy you won’t want to take them off - perfect for round the clock dressing. The statement washes sleeken the silhouette and bring versatility day-to-night.</p>
 <p>Pair these super soft skinny jeans with crop top, heels and accessories with a clutch for effortless chic.</p>
@@ -124,7 +129,7 @@ INSERT INTO `products` VALUES (4, 'Ella Skinny Jeans', '<p>Super-skinny in a cho
 	<li>5-pocket detail</li>
 	<li>Available in 2 sizes</li>
 </ul>
-<p>Colours: Black, Indigo. 70% cotton, 26% polyester, 4% elastane. Machine washable.</p>', 25.00, '2015-04-25 15:23:54', 5, 'SouthHighRiseEllaJeans.png', 'Indigo', '12', NULL, 'South');
+<p>Colours: Black, Indigo. 70% cotton, 26% polyester, 4% elastane. Machine washable.</p>', 25.00, '2015-04-25 15:23:54', 5, 'SouthHighRiseEllaJeans.png', 11, 2, NULL, 'South');
 INSERT INTO `products` VALUES (5, 'Crew T-shirt', '<p>A big hitter in the world of menswear, this tee is given a denim pocket hit that works for a variety of occasions - from dinner on holiday to a night spent socialising.</p>
 <p>The round neck, short sleeve silhouette ensures essential comfort, whilst the patterned denim-style pocket is the statement focal point. Matching tipping to the cuffs complete a trendy style that anticipates the summer sunshine.</p>
 <p>Pair this T-shirt with denim shorts and boat shoes for smart-casual attire that makes an immediate impact.</p>
@@ -136,10 +141,10 @@ INSERT INTO `products` VALUES (5, 'Crew T-shirt', '<p>A big hitter in the world 
 	<li>Round neck</li>
 	<li>Tipping to cuffs</li>
 </ul>
-<p>Colour: Navy. Cotton. Machine washable.</p>', 18.00, '2015-04-24 16:23:31', 11, 'GoodsoulsMensCrew.png', 'Navy', NULL, 'M', 'Goodsouls');
+<p>Colour: Navy. Cotton. Machine washable.</p>', 18.00, '2015-04-24 16:23:31', 11, 'GoodsoulsMensCrew.png', 3, NULL, 4, 'Goodsouls');
 INSERT INTO `products` VALUES (6, 'Fill Zip Hoody', '<p>Long-sleeve, brush back full-zip hoody with transparent ripstop overlay on hood and back panel. Zip pull attachment with reflective flecks. Pop colour, full-zip and back bib binding. Centre front, high-density Nike Sportswear logo screen print. Cut-and-sew shoulder and back panels.</p>
-<p>Colour: Black/White. 80% cotton, 20% polyester. Machine washable.</p>', 60.00, '2015-04-24 12:34:12', 3, 'FillZipHoody.png', 'black', NULL, 'L', 'Nike');
-INSERT INTO `products` VALUES (7, 'Plaintiff Sunglasses', '<p>Oakley Sunglasses Plaintiff Squared Polished Gold/Dark Grey is designed for men and the frame is gold. This style has a xtra large - 63mm - lens diameter. The bridge size for this model is 14mm and the side length is standard. This adult designer sunglasses model is a metal, square shape with a full rimmed frame. The Oakley sunglasses come inclusive of soft bag & cleaning cloth. minmum 12 month warranty and authenticity guaranteed.</p>', 145.00, '2015-04-26 21:53:23', 1, 'PlaintiffSquared.png', 'Lead', NULL, 'XL', 'Oakley');
+<p>Colour: Black/White. 80% cotton, 20% polyester. Machine washable.</p>', 60.00, '2015-04-24 12:34:12', 3, 'FillZipHoody.png', 2, NULL, 5, 'Nike');
+INSERT INTO `products` VALUES (7, 'Plaintiff Sunglasses', '<p>Oakley Sunglasses Plaintiff Squared Polished Gold/Dark Grey is designed for men and the frame is gold. This style has a xtra large - 63mm - lens diameter. The bridge size for this model is 14mm and the side length is standard. This adult designer sunglasses model is a metal, square shape with a full rimmed frame. The Oakley sunglasses come inclusive of soft bag & cleaning cloth. minmum 12 month warranty and authenticity guaranteed.</p>', 145.00, '2015-04-26 21:53:23', 1, 'PlaintiffSquared.png', 12, NULL, 6, 'Oakley');
 INSERT INTO `products` VALUES (8, 'Devie Mar Sandals', '<p>Giving the classic a little glam update, the Devie mar leather gladiator sandals by UGG® Australia are the perfect mix of function and style.</p>
 <p>Available in two classic colours, go for black for a wear-with-anything guarantee or chocolate to show off your summer tan. Thin criss-cross straps add to the gladiator appeal of these flats, while the double buckled fastenings create an antique look with their old school metal look. Cushioned under foot with a flexible moulded rubber outsole, they provide unparalleled comfort that’ll come in handy when spending days at a time sightseeing this summer.</p>
 <p>Wear them with denim shorts, maxi dresses and skirts this season to show off just how versatile they are.</p>
@@ -152,9 +157,9 @@ INSERT INTO `products` VALUES (8, 'Devie Mar Sandals', '<p>Giving the classic a 
 	<li>Flexible moulded rubber outsole</li>
 	<li>Plush Poron® cushioned foot bed</li>
 </ul>
-<p>Colours: Black, Chocolate. Upper: Leather. Lining: Leather. Sole: Other materials.</p>', 99.00, '2015-04-24 18:24:45', 9, 'DevieMarGladiatorSandals.png', 'Chocolate', '35', NULL, 'Ugg');
+<p>Colours: Black, Chocolate. Upper: Leather. Lining: Leather. Sole: Other materials.</p>', 99.00, '2015-04-24 18:24:45', 9, 'DevieMarGladiatorSandals.png', 13, 6, NULL, 'Ugg');
 INSERT INTO `products` VALUES (9, 'Stretch Shirt', '<p>Slim fit shirt with stretch for fashion fit. Single cuff.</p>
-<p>Colour: White. 97% cotton, 3% elastane. Machine washable.</p>', 13.50, '2015-04-24 14:23:43', 8, 'TaylorReeceMensStretch.png', 'White', '16.5', NULL, 'Taylor & Reece');
+<p>Colour: White. 97% cotton, 3% elastane. Machine washable.</p>', 13.50, '2015-04-24 14:23:43', 8, 'TaylorReeceMensStretch.png', 1, 1, NULL, 'Taylor & Reece');
 INSERT INTO `products` VALUES (10, 'Slim Fit PV Suit Jacket', '<p>Get suited and booted with this fine Taylor & Reece suit jacket.</p>
 <p>In a rich navy colourway it’s a luxurious offering for the contemporary gent. The slim fit ensures that you retain a suave silhouette, whilst the centre back vent allows for an elegant tapered fit.</p>
 <p>A minimal two-button fastening with flapover pockets and a single chest pocket provide the essential formal detailing, with a striped contrast lining offering a sharp finish.</p>
@@ -170,7 +175,7 @@ INSERT INTO `products` VALUES (10, 'Slim Fit PV Suit Jacket', '<p>Get suited and
 	<li>Flapover pockets</li>
 	<li>Button cuffs</li>
 </ul>
-<p>Colour: Navy. 80% polyester, 18% viscose, 2% linen. Dry clean only.</p>', 65.00, '2015-04-24 23:34:12', 4, 'SlimFitPVSuitJacket.png', 'Navy', '40', NULL, 'Taylor & Reece');
+<p>Colour: Navy. 80% polyester, 18% viscose, 2% linen. Dry clean only.</p>', 65.00, '2015-04-24 23:34:12', 4, 'SlimFitPVSuitJacket.png', 3, 11, NULL, 'Taylor & Reece');
 
 
 
@@ -226,3 +231,66 @@ CREATE TABLE `admins` (
   PRIMARY KEY (`id`)
 );
 INSERT INTO `admins` VALUES(1, 'Islam', 'Dudaev', 'islam89uk@gmail.com', 'islam895');
+
+
+
+DROP TABLE IF EXISTS `colours`;
+CREATE TABLE `colours` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `colour` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+INSERT INTO `colours` VALUES(1, 'White');
+INSERT INTO `colours` VALUES(2, 'Black');
+INSERT INTO `colours` VALUES(3, 'Navy');
+INSERT INTO `colours` VALUES(4, 'Blue');
+INSERT INTO `colours` VALUES(5, 'Grey');
+INSERT INTO `colours` VALUES(6, 'Green');
+INSERT INTO `colours` VALUES(7, 'Red');
+INSERT INTO `colours` VALUES(8, 'Brown');
+INSERT INTO `colours` VALUES(9, 'Pink');
+INSERT INTO `colours` VALUES(10, 'Yellow');
+INSERT INTO `colours` VALUES(11, 'Indigo');
+INSERT INTO `colours` VALUES(12, 'Lead');
+INSERT INTO `colours` VALUES(13, 'Chocolate');
+
+
+DROP TABLE IF EXISTS `size_numbers`;
+CREATE TABLE `size_numbers` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `size_number` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+INSERT INTO `size_numbers` VALUES(1, '30');
+INSERT INTO `size_numbers` VALUES(2, '31');
+INSERT INTO `size_numbers` VALUES(3, '32');
+INSERT INTO `size_numbers` VALUES(4, '33');
+INSERT INTO `size_numbers` VALUES(5, '34');
+INSERT INTO `size_numbers` VALUES(6, '35');
+INSERT INTO `size_numbers` VALUES(7, '36');
+INSERT INTO `size_numbers` VALUES(8, '37');
+INSERT INTO `size_numbers` VALUES(9, '38');
+INSERT INTO `size_numbers` VALUES(10, '39');
+INSERT INTO `size_numbers` VALUES(11, '40');
+INSERT INTO `size_numbers` VALUES(12, '41');
+INSERT INTO `size_numbers` VALUES(13, '42');
+INSERT INTO `size_numbers` VALUES(14, '43');
+
+
+DROP TABLE IF EXISTS `size_letters`;
+CREATE TABLE `size_letters` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+  `size_letter` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+INSERT INTO `size_letters` VALUES(1, 'XXS');
+INSERT INTO `size_letters` VALUES(2, 'XS');
+INSERT INTO `size_letters` VALUES(3, 'S');
+INSERT INTO `size_letters` VALUES(4, 'M');
+INSERT INTO `size_letters` VALUES(5, 'L');
+INSERT INTO `size_letters` VALUES(6, 'XL');
+INSERT INTO `size_letters` VALUES(7, 'XXL');
+INSERT INTO `size_letters` VALUES(8, 'XXXL');
+INSERT INTO `size_letters` VALUES(9, 'XXXXL');
+
+

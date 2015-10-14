@@ -1,7 +1,7 @@
 <?php
 
 	
-$form = new Select();
+$form = new Form();
 $validation = new Valid($form);
 $user = new User();
 	
