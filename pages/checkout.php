@@ -10,9 +10,10 @@ if(!empty($user)){
 $form = new Form();
 $validation = new Valid($form);
 
-
+// If form is submitted
 if ($form->isPost('first_name')) {
-		
+	
+	// fields that are expected to receieve
 	$validation->expect = array(
 		'first_name',
 		'last_name',
@@ -23,9 +24,9 @@ if ($form->isPost('first_name')) {
 		'post_code',
 		'country',
 		'email'
-	);
+	); 
 	
-	$validation->requirement = array(
+	$validation->required = array(
 		'first_name',
 		'last_name',
 		'address_1',
@@ -69,7 +70,7 @@ require_once('sidebar.php');
 					<label for="first_name">First name: <span>*</span></label>
 				</th>
 				<td>
-					<?php echo $validation->warn('first_name'); ?>
+					<?php echo $validation->validate('first_name'); ?>
 					<input type="text" name="first_name" 
 					id="first_name" class="ship_input" 
 					value="<?php echo $form->textField('first_name', $user['first_name']); ?>" />
@@ -80,7 +81,7 @@ require_once('sidebar.php');
 					<label for="last_name">Last name: <span>*</span></label>
 				</th>
 				<td>
-					<?php echo $validation->warn('last_name'); ?>
+					<?php echo $validation->validate('last_name'); ?>
 					<input type="text" name="last_name" 
 					id="last_name" class="ship_input" 
 					value="<?php echo $form->textField('last_name', $user['last_name']); ?>" />
@@ -91,7 +92,7 @@ require_once('sidebar.php');
 					<label for="address_1">Address 1: <span>*</span></label>
 				</th>
 				<td>
-					<?php echo $validation->warn('address_1'); ?>
+					<?php echo $validation->validate('address_1'); ?>
 					<input type="text" name="address_1" 
 					id="address_1" class="ship_input" 
 					value="<?php echo $form->textField('address_1', $user['address_1']); ?>" />
@@ -102,7 +103,7 @@ require_once('sidebar.php');
 					<label for="address_2">Address 2: </label>
 				</th>
 				<td>
-					<?php echo $validation->warn('address_2'); ?>
+					
 					<input type="text" name="address_2" 
 					id="address_2" class="ship_input" 
 					value="<?php echo $form->textField('address_2', $user['address_2']); ?>" />
@@ -113,7 +114,7 @@ require_once('sidebar.php');
 					<label for="city">City: <span>*</span></label>
 				</th>
 				<td>
-					<?php echo $validation->warn('city'); ?>
+					<?php echo $validation->validate('city'); ?>
 					<input type="text" name="city" 
 					id="city" class="ship_input" 
 					value="<?php echo $form->textField('city', $user['city']); ?>" />
@@ -124,7 +125,7 @@ require_once('sidebar.php');
 					<label for="county">County: </label>
 				</th>
 				<td>
-					<?php echo $validation->warn('county'); ?>
+					
 					<input type="text" name="county" 
 					id="county" class="ship_input" 
 					value="<?php echo $form->textField('county', $user['county']); ?>" />
@@ -135,7 +136,7 @@ require_once('sidebar.php');
 					<label for="post_code">Postcode: <span>*</span></label>
 				</th>
 				<td>
-					<?php echo $validation->warn('post_code'); ?>
+					<?php echo $validation->validate('post_code'); ?>
 					<input type="text" name="post_code" 
 					id="post_code" class="ship_input" 
 					value="<?php echo $form->textField('post_code', $user['post_code']); ?>" />
@@ -146,7 +147,7 @@ require_once('sidebar.php');
 					<label for="country">Country: <span>*</span></label>
 				</th>
 				<td>
-					<?php echo $validation->warn('country'); ?>
+					<?php echo $validation->validate('country'); ?>
 					<input type="text" name="country" 
 					id="country" class="ship_input" 
 					value="<?php echo $form->textField('country', $user['country']); ?>" />
@@ -157,7 +158,7 @@ require_once('sidebar.php');
 					<label for="email">Email: <span>*</span></label>
 				</th>
 				<td>
-					<?php echo $validation->warn('email'); ?>
+					<?php echo $validation->validate('email'); ?>
 					<input type="text" name="email" 
 					id="email" class="ship_input" 
 					value="<?php echo $form->textField('email', $user['email']); ?>" />

@@ -116,15 +116,17 @@ class Form {
 		}
 	}
 	
-	public function postList($expect = null){
+	// See Valid.php process() method.
+	public function getPostArray($expect = null){
 		
 		$print = array();
-		
+		// if post is submitted
 		if($this->isPost()){
 			foreach($_POST as $key => $value){
 				
 				if(!empty($expect)){
 					if(in_array($key, $expect)){
+						//removing the html tags using strip_tags
 						$print[$key] = strip_tags($value);
 					}
 				} else {

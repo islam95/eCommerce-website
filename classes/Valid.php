@@ -1,15 +1,15 @@
 <?php
 class Valid {
 	
-	private $select;
-	private $errors = array(); 
-	public $expect = array();
-	public $requirement = array();
-	public $spec_field = array();
-	public $post = array();
-	public $remove_post = array();
-	public $format_post = array();
-	// messages for user
+	private $form; // form object
+	private $errors = array(); //for storing all error ids
+	public $expect = array(); //list of expected fields
+	public $required = array(); //list of required fields
+	public $spec_field = array(); // list of special validation fields
+	public $post = array(); // list of values that is sent through the form
+	public $remove_post = array(); //fields to be removed from the $post array
+	public $format_post = array(); //fileds to be specifically formatted 
+	// messages for user (validation message)
 	public $message = array(
 		"first_name" => "You missed your first name",
 		"last_name" => "You missed your last name",
@@ -27,15 +27,15 @@ class Valid {
 	);	
 	
 	
-	public function __construct($select){
-		$this->select = $select;
+	public function __construct($form){
+		$this->form = $form;
 	}
 	
-	
 	public function process(){
-		if($this->select->isPost() && !empty($this->requirement)){
+		//if form has been submitted and required array is empty there is nothing to validate
+		if($this->form->isPost() && !empty($this->required)){
 			// get only expected fields
-			$this->post = $this->select->postList($this->expect);
+			$this->post = $this->form->getPostArray($this->expect); // see Form.php getPostArray() method
 			if(!empty($this->post)){
 				foreach($this->post as $key => $value){
 					$this->check($key, $value);
@@ -44,38 +44,34 @@ class Valid {
 		}
 	}
 	
-	
-	public function inErrors($key){
+	// Adding errors tho the error array
+	public function addErrors($key){
 		$this->errors[] = $key;
 	}
-	
-	
-	
-	
 	
 	public function check($key, $value){
 		if(!empty($this->spec_field) && array_key_exists($key, $this->spec_field)) {
 			$this->checkSpecField($key, $value);
 		} else {
-			if(in_array($key, $this->requirement) && empty($value)){
-				$this->inErrors($key);
+			// if the field is required
+			if(in_array($key, $this->required) && empty($value)){
+				$this->addErrors($key);
 			}
 		}
 	}
 	
+	// Checking the email submitted in the form
 	public function checkSpecField($key, $value){
 		switch($this->spec_field[$key]){
 			case 'email':
 			if (!$this->isEmail($value)){
-				$this->inErrors($key);
+				$this->addErrors($key);
 			}
 			break;
 		}
 	}
 
-	
-	
-	
+	// To validate an email addresses
 	public function isEmail($email = null){
 		if(!empty($email)){
 			$result = filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -84,8 +80,6 @@ class Valid {
 		return false;
 	}
 	
-	
-	
 	public function isValid(){
 		$this->process();
 		
@@ -93,7 +87,7 @@ class Valid {
 			// Remove all unwanted fields.
 			if(!empty($this->remove_post)){
 				foreach($this->remove_post as $value){
-					unset($this->post[$value]);
+					unset($this->post[$value]); // removing the values from the post array
 				}
 			}
 			
@@ -108,34 +102,32 @@ class Valid {
 		return false;
 	}
 	
-	
-	
-	
+	// Format required field
 	public function format($key, $value){
 		switch($value){
 			case 'password':
+			// Encrypting the password which is sent as plaintext
 			$this->post[$key] = Login::encrypt($this->post[$key]);
 			break;
 		}
 	}
 	
-	
-	
-	public function warn($key){
+	//Used in checkout.php in the form
+	public function validate($key){
+		// if there is nothing in error array, meaning if there is it wouldn't be validated
 		if(!empty($this->errors) && in_array($key, $this->errors)){
 			return $this->warning($this->message[$key]);
 		}
 	}
 	
-	
-	public function warning($string = null){
-		if(!empty($string)){
-			return "<span class=\"warning\">{$string}</span>";
+	// Method to display the warning in the form.
+	public function warning($message = null){
+		if(!empty($message)){
+			return "<span class=\"warning\">{$message}</span>";
 		}
 	}
 	
 	
-	
-	
-	
 }
+
+

@@ -53,8 +53,8 @@ class Login {
 	
 	
 	// encrypting string (passwords) with hash encryption called sha384,
-	// can be used any hash function for this assignment purpose.
-	public static function encrypt($string = null){
+	// can be used any hash function. 
+	public static function encrypt($string = null){ // See Valid.php -> format() method
 		if(!empty($string)){
 			return hash('sha384', $string);
 		}
@@ -62,9 +62,7 @@ class Login {
 	
 	
 	
-	
-	
-	
-	
-	
 }
+
+
+
