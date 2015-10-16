@@ -2,17 +2,18 @@
 	
 class User extends Application {
 	
-	private $users = "users";
+	private $users = "users"; // users table in db
 	public $user_id;
 	
 	
-	
+	// Check if the user with specific email address and password exists.
 	public function exist($email, $password){
-		$password = Login::encrypt($password);
+		$password = Login::encrypt($password); // encripting the password
 		
 		$sql = "SELECT * FROM `{$this->users}` 
 				WHERE `email` = '".$this->db->escape($email)."' 
-				AND `password` = '".$this->db->escape($password)."'";
+				AND `password` = '".$this->db->escape($password)."'
+				AND `active` = 1";
 				
 		$result = $this->db->getOneRecord($sql);
 		

@@ -636,7 +636,9 @@ footer #right  {
 	display: block;
 	padding-left: 10px;
 }
-.next_btn {
+
+
+/*.next_btn {
 	float: right;
 	padding: 5px 20px;
 	background-color: #375A78;
@@ -644,7 +646,8 @@ footer #right  {
 	font-size: 130%;
 	margin: 35px 0;
 	margin-right: 10px;
-}
+}*/
+
 
 /* Login and register form */
 .log_reg input[type="text"],
@@ -653,21 +656,11 @@ footer #right  {
 	width: 300px;
 	height: 30px;
 	font-size: 90%;
-	color: grey;
 	padding-left: 5px;
 	margin-bottom: 5px;
 }
 .log_reg {
 	text-align: left;
-}
-.log_reg .aButton {
-	float: left;
-	padding: 5px 20px;
-	background-color: #375A78;
-	color: #FFFFFF;
-	font-size: 130%;
-	margin: 35px 0;
-	margin-right: 10px;
 }
 .log_reg h2{
 	text-align: left;

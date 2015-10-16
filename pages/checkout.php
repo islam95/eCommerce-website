@@ -1,5 +1,6 @@
 <?php 
 
+// restrict the user to continue without login
 Login::noAccess();
 
 $theUser = new User();

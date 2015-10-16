@@ -58,9 +58,9 @@ if(!empty($id)){
 					<p>Size</p>
 					<?php 
 					if(!empty($product['size_number'])){
-						echo $form->getSizeNumber();
+						echo $form->getSizeNumber(1);
 					} else {
-						echo $form->getSizeLetter();
+						echo $form->getSizeLetter(1);
 					}
 					?>	
 					

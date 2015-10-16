@@ -42,9 +42,9 @@ class Check {
 			break;
 		}
 	}
-	
-	
-	
+	 
+	// Used in Login.php -> noAcces() method and in login.php
+	// Redirecting the user to the specified page
 	public static function redirect($url = null){
 		if(!empty($url)){
 			header("Location: {$url}");

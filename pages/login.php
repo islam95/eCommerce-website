@@ -1,5 +1,8 @@
 <?php
 
+if(Login::loggedIn(Login::$login_page)){
+	Check::redirect(Login::$orders_page);
+}
 	
 $form = new Form();
 $validation = new Valid($form);
@@ -7,8 +10,14 @@ $user = new User();
 	
 	
 // Login form
-if($form->isPost('login_email')){
-	if($user->exist($form->getPost('login_email'), $form->getPost('login_password'))) {
+if($form->isPost('login_email')){ // if email has been posted
+	if(
+		// if user is found
+		$user->exist(
+			$form->getPost('login_email'), 
+			$form->getPost('login_password')
+		)
+	) {
 		Login::userLogin($user->user_id, URL::getRedirectURL());
 	} else {
 		$validation->addErrors('login');
@@ -54,7 +63,7 @@ if($form->isPost('first_name')){
 	$p2 = $form->getPost('confirm_password');
 	
 	if(!empty($p1) && !empty($p2) && $p1 != $p2){
-		$validation->inErrors('password_match');
+		$validation->addErrors('password_match');
 	}
 	
 	
@@ -62,7 +71,7 @@ if($form->isPost('first_name')){
 	$theUser = $user->getByEmail($email);
 	
 	if(!empty($theUser)){
-		$validation->inErrors('same-email');
+		$validation->addErrors('same-email');
 	}
 	
 	if($validation->isValid()){
@@ -90,11 +99,10 @@ require_once('sidebar.php');
 ?>
 
 <div class="log_reg">
+
 <h2>Login</h2>
 <form action="" method="post">
-
 	<table class="table_login">
-		
 		<tr>
 			<th>
 				<label for="login_email">Login:</label>
@@ -106,7 +114,6 @@ require_once('sidebar.php');
 					   value="" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="login_password">Password:</label>
@@ -117,29 +124,23 @@ require_once('sidebar.php');
 					   value="" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>&nbsp;</th>
 			<td>
 				<label for="login_button" class="login_button">
 					<input type="submit" id="login_button"
-						   class="aButton" value="Login" />
+						   class="log_reg_btn" value="Login" />
 				</label>
 			</td>
 		</tr>
-		
 	</table>
-
 </form>
 
 <hr>
 
 <h3>Not registered?</h3>
-
 <form action="" method="post">
-	
 	<table class="table_reg">
-		
 		<tr>
 			<th>
 				<label for="first_name">First name: <span>*</span></label>
@@ -151,7 +152,6 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('first_name'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="last_name">Last name: <span>*</span></label>
@@ -163,7 +163,6 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('last_name'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="address_1">Address 1: <span>*</span></label>
@@ -175,7 +174,6 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('address_1'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="address_2">Address 2: </label>
@@ -187,7 +185,6 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('address_2'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="city">City: <span>*</span></label>
@@ -199,7 +196,6 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('city'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="county">County: </label>
@@ -211,7 +207,6 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('county'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="post_code">Postcode: <span>*</span></label>
@@ -223,10 +218,9 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('post_code'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
-				<label for="country">Country: <span>*</span></label>
+				<label for="country">Country: </label>
 			</th>
 			<td>
 				<?php echo $validation->validate('country'); ?>
@@ -235,7 +229,6 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('country'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="email">Email: <span>*</span></label>
@@ -248,7 +241,6 @@ require_once('sidebar.php');
 				value="<?php echo $form->textField('email'); ?>" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="password">Password: <span>*</span></label>
@@ -261,7 +253,6 @@ require_once('sidebar.php');
 				value="" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>
 				<label for="confirm_password">Confirm password: <span>*</span></label>
@@ -273,19 +264,16 @@ require_once('sidebar.php');
 				value="" />
 			</td>
 		</tr>
-		
 		<tr>
 			<th>&nbsp;</th>
 			<td>
-				<label for="button" class="button">
-					<input type="submit" id="button"
-						   class="aButton" value="Register" />
+				<label for="reg_button" class="reg_button">
+					<input type="submit" id="reg_button"
+						   class="log_reg_btn" value="Register" />
 				</label>
 			</td>
 		</tr>
-
 	</table>
-	
 </form>
 </div>
 

@@ -55,21 +55,16 @@ class URL {
 		return "?".implode("&", $arr);
 	}
 	
-	
-	
+	// used in login.php
 	public static function getRedirectURL(){
-		
 		$aPage = self::getParameter(Login::$redirect);
-		
 		return !empty($aPage) ? "?page={$aPage}" : null;
 	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
 }
+
+
+
+
