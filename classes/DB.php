@@ -23,6 +23,7 @@ class DB {
 		$this->connect(); // connecting to the database.
 	}
 	
+	// Connecting to the database
 	private function connect() {
 		$this->connectToDB = mysql_connect($this->db_host, $this->db_user, $this->db_password);
 		
@@ -59,6 +60,7 @@ class DB {
 		return $value;
 	}
 	
+
 	public function query($sql) {
 		$this->last_query = $sql;
 		$result = mysql_query($sql, $this->connectToDB);
@@ -76,6 +78,7 @@ class DB {
 		}
 	}
 	
+	// To get all records from the table in db
 	public function getAllRecords($sql) {
 		$result = $this->query($sql);
 		$output = array();
@@ -86,16 +89,19 @@ class DB {
 		return $output;
 	}
 	
+	// To get just one specific record from the table in db
 	public function getOneRecord($sql) {
 		$output = $this->getAllRecords($sql);
 		return array_shift($output);
 	}
 	
+	// the id of the lastly inserted record to the database
 	public function lastID() {
 		return mysql_insert_id($this->connectToDB);
 	}
 	
-	
+	// Method for preparing the data to insert into the table using insertData()
+	// used in User.php -> addUser() method
 	public function insert($array = null){
 		if(!empty($array)){
 			foreach($array as $key => $value){
@@ -105,11 +111,13 @@ class DB {
 		}
 	}
 	
+	// Inserts data into the table
+	// used in User.php -> addUser() method
 	public function insertData($users = null){
 		
 		if(!empty($users) && !empty($this->insert_keys) && !empty($this->insert_values)){
 			$sql  = "INSERT INTO `{$users}` (`";
-			$sql .= implode("`, `", $this->insert_keys);
+			$sql .= implode("`, `", $this->insert_keys); // implode - joins the values from array using concatinator (,)
 			$sql .= "`) VALUES ('";
 			$sql .= implode("', '", $this->insert_values);
 			$sql .= "');";
@@ -117,8 +125,7 @@ class DB {
 			if($this->query($sql)){
 				$this->id = $this->lastID();
 				return true;
-			}
-			
+			}			
 			return false;
 		}
 	}

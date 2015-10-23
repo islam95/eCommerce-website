@@ -25,6 +25,9 @@ defined("MODULES_FOLDER") || define("MODULES_FOLDER", "modules");
 	
 // Include folder.
 defined("INCLUDE_FOLDER") || define("INCLUDE_FOLDER", "include");
+
+// Libraries folder.
+defined("LIBS_FOLDER") || define("LIBS_FOLDER", "libs");
 	
 // Templates folder.
 defined("TEMPLATE_FOLDER") || define("TEMPLATE_FOLDER", "template");
@@ -43,6 +46,7 @@ set_include_path(
 			realpath(ROOT_PATH.DIR_SEP.PAGES_FOLDER),
 			realpath(ROOT_PATH.DIR_SEP.MODULES_FOLDER),
 			realpath(ROOT_PATH.DIR_SEP.INCLUDE_FOLDER),
+			realpath(ROOT_PATH.DIR_SEP.LIBS_FOLDER),
 			realpath(ROOT_PATH.DIR_SEP.TEMPLATE_FOLDER),
 			get_include_path()
 		)

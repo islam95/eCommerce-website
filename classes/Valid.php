@@ -7,23 +7,23 @@ class Valid {
 	public $required = array(); //list of required fields
 	public $spec_field = array(); // list of special validation fields
 	public $post = array(); // list of values that is sent through the form
-	public $remove_post = array(); //fields to be removed from the $post array
-	public $format_post = array(); //fileds to be specifically formatted 
+	public $remove_post = array(); //fields to be removed from the $post array (not adding to db)
+	public $format_post = array(); //fileds to be specifically formatted(like password for encryption)
 	// messages for user (validation message)
 	public $message = array(
-		"first_name" => "You missed your first name",
-		"last_name" => "You missed your last name",
-		"address_1" => "You missed first line of your address",
-		"city" => "You missed your city name",
-		"county" => "You missed your county name",
-		"post_code" => "You missed your post code",
-		"country" => "You missed your country name",
-		"email" => "Please provide valid email address",
-		"same-email" => "This email address already exists",
-		"login" => "Please enter a valid email address or password.",
-		"password" => "Please create a password",
-		"confirm_password" => "Please confirm a password above",
-		"password_match" => "Passwords does not match"
+		"first_name" 		=> "You missed your first name",
+		"last_name" 		=> "You missed your last name",
+		"address_1" 		=> "You missed first line of your address",
+		"city" 				=> "You missed your city name",
+		"county" 			=> "You missed your county name",
+		"post_code" 		=> "You missed your post code",
+		"country" 			=> "You missed your country name",
+		"email" 			=> "Please provide valid email address",
+		"same_email" 		=> "This email address already exists",
+		"login" 			=> "Please enter a valid email address or password.",
+		"password" 			=> "Please create a password",
+		"confirm_password" 	=> "Please confirm your password",
+		"password_match" 	=> "Passwords does not match!"
 	);	
 	
 	

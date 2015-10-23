@@ -37,7 +37,6 @@ class Check {
 			foreach($text as $key => $value) {
 				$str = str_replace($value, $textCleaned[$key], $str);
 			}
-			
 			return $str;			
 			break;
 		}
@@ -52,15 +51,13 @@ class Check {
 		}
 	}
 	
-	
+	// used in login.php page
 	public static function setDate($case = null, $date = null){
-		
 		$date = empty($date) ? time() : strtotime($date);
-		
 		switch($case){
 			
 			case 1:
-			return date('d/m/Y', $date);
+			return date('d/m/Y', $date); // day/month/year
 			break;
 			
 			case 2:
@@ -74,10 +71,9 @@ class Check {
 		}
 	}
 	
-	
-	
-	
-	
 
 	
 }
+
+
+

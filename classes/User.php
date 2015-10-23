@@ -24,31 +24,34 @@ class User extends Application {
 		return false;
 	}
 	
-	
-	
+	// Adds new user to the database
 	public function addUser($var = null, $password = null){
 		
 		if(!empty($var) && !empty($password)){
-   			$this->db->insert($var);
-   			if($this->db->insertData($this->users)){
-				return true;
-   			}
-   		}
-   		return false;
-
-	}
-	
-	
-	
-	public function getByEmail($email = null){
-		if(!empty($email)){
-			$sql = "SELECT `id` FROM `{$this->users}`
-					WHERE `email` = '".$this->db->escape($email)."'";
-			return $this->db->getOneRecord($sql);
+			$this->db->insert($var);
+			if($this->db->insertData($this->users)){
+				
+				// sending activation email. 1.php is inside emails folder
+				/*
+				$email = new Email();
+				if($email->process(1, array(
+					'email' 		=> $var['email'],
+					'first_name' 	=> $var['first_name'],
+					'last_name' 	=> $var['last_name'],
+					'password' 		=> $password,
+					'encode' 		=> $var['encode'] //'encode' is generated in pages/login.php file
+				))){
+				*/
+					return true;
+				/*
+				}
+			return false;
+			*/
+			}
+			return false;
 		}
+		return false;
 	}
-	
-	
 	
 	public function getUser($id = null){
 		if(!empty($id)){
@@ -58,7 +61,37 @@ class User extends Application {
 		}
 	}
 	
+	// Getting the user by email
+	// used for checking for the same email addresses
+	public function getByEmail($email = null){
+		if(!empty($email)){
+			$sql = "SELECT `id` FROM `{$this->users}`
+					WHERE `email` = '".$this->db->escape($email)."'
+					AND `active` = 1";
+			return $this->db->getOneRecord($sql);
+		}
+	}
+
+	// Used in pages/activate.php file to get the user by encoding to insert to the link.
+	public function getByCode($code = null){
+		if(!empty($code)){
+			$sql = "SELECT * FROM `{$this->users}`
+					WHERE `encode` = '";
+			$sql .= $this->db->escape($code)."'";
+			return $this->db->getOneRecord($sql);
+		}
+	}
 	
+	//Setting the user active when user clicks the link provided by email
+	//Used only when activation email function is available.
+	public function setActive($id = null){
+		if(!empty($id)){
+			$sql = "UPDATE `{$this->users}`
+					SET `active` = 1
+					WHERE `id` = '".$this->db->escape($id)."'";
+			return $this->db->query($sql);
+		}
+	}
 	
 	public function updateUser($array = null, $id = null){
 		

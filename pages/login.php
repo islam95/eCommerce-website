@@ -8,7 +8,6 @@ $form = new Form();
 $validation = new Valid($form);
 $user = new User();
 	
-	
 // Login form
 if($form->isPost('login_email')){ // if email has been posted
 	if(
@@ -24,10 +23,8 @@ if($form->isPost('login_email')){ // if email has been posted
 	}
 }
 
-
 // Registration form
 if($form->isPost('first_name')){
-	
 	$validation->expect = array(
 		'first_name',
 		'last_name',
@@ -41,41 +38,38 @@ if($form->isPost('first_name')){
 		'password',
 		'confirm_password'
 	);
-	
-	$validation->requirement = array(
+	$validation->required = array(
 		'first_name',
 		'last_name',
 		'address_1',
 		'city',
 		'post_code',
-		'country',
 		'email',
 		'password',
 		'confirm_password'
 	);
 	
 	$validation->spec_field = array('email' => 'email');
-	$validation->remove_post = array('confirm_password');
-	$validation->format_post = array('password' => 'password');
+	$validation->remove_post = array('confirm_password'); //this field will not be added to database 
+	$validation->format_post = array('password' => 'password'); //password to be converted using hash encryption
 	
 	// Password validation.
 	$p1 = $form->getPost('password');
 	$p2 = $form->getPost('confirm_password');
-	
 	if(!empty($p1) && !empty($p2) && $p1 != $p2){
 		$validation->addErrors('password_match');
 	}
 	
-	
+	// for checking the duplicate email addresses
 	$email = $form->getPost('email');
 	$theUser = $user->getByEmail($email);
-	
 	if(!empty($theUser)){
-		$validation->addErrors('same-email');
+		$validation->addErrors('same_email');
 	}
 	
+	// isValid() method called to execute the validation and process() method inside the Valid.php class
 	if($validation->isValid()){
-		echo "It is valid!";
+		// echo "It is valid!";
 		// adding coding to created account
 		$validation->post['encode'] = mt_rand().date('YmdHis').mt_rand();
 		
@@ -235,7 +229,7 @@ require_once('sidebar.php');
 			</th>
 			<td>
 				<?php echo $validation->validate('email'); ?>
-				<?php echo $validation->validate('same-email'); ?>
+				<?php echo $validation->validate('same_email'); ?>
 				<input type="text" name="email" 
 				id="email" class="ship_input" 
 				value="<?php echo $form->textField('email'); ?>" />
@@ -247,7 +241,8 @@ require_once('sidebar.php');
 			</th>
 			<td>
 				<?php echo $validation->validate('password'); ?>
-				<?php echo $validation->validate('password_match'); ?>
+				<!-- Checking if both passwords are the same -->
+				<?php echo $validation->validate('password_match'); ?> 
 				<input type="password" name="password" 
 				id="password" class="ship_input" 
 				value="" />
@@ -280,3 +275,6 @@ require_once('sidebar.php');
 
 
 <?php require_once('footer.php'); ?>
+
+
+

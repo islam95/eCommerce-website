@@ -47,7 +47,7 @@ CREATE TABLE `users` (
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `date` DATETIME NOT NULL,
-  `active` TINYINT(1) NOT NULL DEFAULT '1',
+  `active` TINYINT(1) NOT NULL DEFAULT '1', -- set default as 0 when using activation email.
   `encode` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
