@@ -141,31 +141,9 @@ $(document).ready(function() {
 				}
 			});
 			return false; // so that the page does not scroll up or down when clicking the buttons
-			
 		});
 	}
 	
-/*	// Proceeding to PayPal button.
-	if($('.paypal').length > 0){ //if paypal class found
-		$('.paypal').click(function(){ //by clicking on it execute the function
-			// replacement for checkout page
-			var token = $(this).attr('id');
-			var loading = "<div class=\"load\">";
-			loading = loading + "<p class=\"loading\"></p>";
-			loading = loading + "<p>Redirecting to PayPal...</p>";
-			loading = loading + "</div>";
-			loading = loading + "<div id=\"_paypal\"></div>";
-			
-			$('#cart').fadeOut(200, function(){
-				$(this).html(loading).fadeIn(200, function(){
-					paypal(token);
-				});
-			});
-			
-		});
-	}*/
-
-
 	// Proceeding to PayPal button.
 	if($('.paypal').length > 0){ //if paypal class found
 		$('.paypal').click(function(){ //by clicking on it execute the function
@@ -182,7 +160,7 @@ $(document).ready(function() {
 					paypal(token);
 				});
 			});
-			
+
 		});
 	}
 

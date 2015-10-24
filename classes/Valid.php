@@ -82,7 +82,6 @@ class Valid {
 	
 	public function isValid(){
 		$this->process();
-		
 		if(empty($this->errors) && !empty($this->post)){
 			// Remove all unwanted fields.
 			if(!empty($this->remove_post)){
@@ -90,7 +89,6 @@ class Valid {
 					unset($this->post[$value]); // removing the values from the post array
 				}
 			}
-			
 			// Format all required fields
 			if(!empty($this->format_post)){
 				foreach($this->format_post as $key => $value){

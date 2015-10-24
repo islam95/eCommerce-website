@@ -505,9 +505,6 @@ footer #right  {
 }
 
 /*********************** Main Cart page *********************************/
-.mainContent #cart {
-	text-align: left;
-}
 .mainContent #cart h2, .mainContent #order h2{
 	font-size: 120%;
 }

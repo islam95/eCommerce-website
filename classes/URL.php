@@ -35,10 +35,8 @@ class URL {
 	
 	// This function basically will return url something like: /?page=about
 	public static function getURL($remove = null){
-		
 		self::getAll();
 		$arr = array();
-
 		if(!empty($remove)){
 			$remove = !is_array($remove) ? array($remove) : $remove;
 			foreach(self::$params as $key => $value){
@@ -47,11 +45,9 @@ class URL {
 				}
 			}
 		}
-
 		foreach(self::$params as $key => $value){
 			$arr[] = $key."=".$value;
 		}
-
 		return "?".implode("&", $arr);
 	}
 	

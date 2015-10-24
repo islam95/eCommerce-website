@@ -7,6 +7,19 @@ class Colour extends Application{
 				ORDER BY `id` ASC";
 		return $this->db->getAllRecords($sql);
 	}
+
+	public function getColour($id = null){
+		if(!empty($id)){
+			$sql = "SELECT * FROM `colours`
+					WHERE `id` = '".$this->db->escape($id)."'";
+			return $this->db->getOneRecord($sql);
+		}
+	}
 	
+
+
+
+
 }
+
 

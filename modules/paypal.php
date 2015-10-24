@@ -11,41 +11,39 @@ if($token2 == Login::encrypt($token1)){
 	// Creating order.
 	$newOrder = new Order();
 	if($newOrder->createOrder()){
-		
 		//populate order details.
 		$order = $newOrder->getOrder();
 		$items = $newOrder->getOrderItems();
 		
-		if(!empty($order) && !empty($products)){
-			
+		if(!empty($order) && !empty($items)){
 			$newBasket = new Basket();
 			$products = new Products();
 			$newPayPal = new PayPal();
 			
-			foreach($products as $product){
-				$item = $products->getProduct($product['product']);
-				$newPayPal->addProduct($product['product'], $item['name'], $product['price'], $product['qty']);
+			foreach($items as $item){
+				$product = $products->getProduct($item['product']);
+				$newPayPal->addProduct($item['product'], $product['name'], $item['price'], $item['qty']);
 			}
-			
+			//populate user details.
 			$newUser = new User();
 			$user = $newUser->getUser($order['user']);
 			
 			if(!empty($user)){
-				
+				// passing user details to PayPal instance.
 				$newPayPal->populate = array(
-					'address1' => $user['address_1'],
-					'address2' => $user['address_2'],
-					'city' => $user['city'],
-					'state' => $user['county'],
-					'zip' => $user['post_code'],
-					'country' => 'GB',
-					'email' => $user['email'],
-					'first_name' => $user['first_name'],
-					'last_name' => $user['last_name']
+					'address1' 		=> $user['address_1'],
+					'address2' 		=> $user['address_2'],
+					'city' 			=> $user['city'],
+					'state' 		=> $user['county'],
+					'zip' 			=> $user['post_code'],
+					'country' 		=> 'GB',
+					'email' 		=> $user['email'],
+					'first_name' 	=> $user['first_name'],
+					'last_name' 	=> $user['last_name']
 				);
 				
-				// redirecting to PayPal
-				echo $newPayPal->redirectPayPal($order['id']);
+				// redirecting the user to PayPal
+				echo $newPayPal->run($order['id']);
 			}
 		}
 	}

@@ -184,7 +184,7 @@ DROP TABLE IF EXISTS `orders_products`;
 CREATE TABLE `orders_products` (
   	`id` INT(10) NOT NULL AUTO_INCREMENT,
   	`order` INT(10) NOT NULL,
-  	`products` INT(10) NOT NULL,
+  	`product` INT(10) NOT NULL,
   	`price` DECIMAL(8,2) NOT NULL,
   	`qty` INT(10) NOT NULL DEFAULT '1',
   	PRIMARY KEY (`id`),

@@ -1,7 +1,6 @@
 <?php
 class Check {
 	
-	
 	public static function getActive($page = null) {
 		if(!empty($page)) {
 			if(is_array($page)) {
@@ -74,6 +73,5 @@ class Check {
 
 	
 }
-
 
 

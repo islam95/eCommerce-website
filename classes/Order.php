@@ -55,10 +55,8 @@ class Order extends Application {
 					//clearing up the arrays
 					$this->fields = array();
 					$this->values = array();
-					
 					return $this->addProducts($this->id);//can add later an item to the order
 				}
-				
 			}
 			return false;
 		}
@@ -82,11 +80,11 @@ class Order extends Application {
 		return false;
 	}
 	
-	public function getOrder($order_id = null){
-		$order_id = !empty($order_id) ? $order_id : $this->id;
+	public function getOrder($_id = null){
+		$_id = !empty($_id) ? $_id : $this->id;
 		$sql = "SELECT * FROM `{$this->orders}` 
-				WHERE `id` = '".$this->db->escape($order_id)."'";
-		return $this->db->getAllRecords($sql);	
+				WHERE `id` = '".$this->db->escape($_id)."'";
+		return $this->db->getOneRecord($sql);	
 	}
 	
 	public function getOrderItems($order_id = null){
