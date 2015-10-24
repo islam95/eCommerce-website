@@ -23,9 +23,9 @@ INSERT INTO `categories` VALUES (12, 'Underwear & Socks');
 
 DROP TABLE IF EXISTS `statuses`;
 CREATE TABLE `statuses` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`)
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 INSERT INTO `statuses` VALUES(1, 'Pending');
 INSERT INTO `statuses` VALUES(2, 'Processing');
@@ -35,21 +35,21 @@ INSERT INTO `statuses` VALUES(3, 'Dispatched');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(100) NOT NULL,
-  `last_name` VARCHAR(100) NOT NULL,
-  `address_1` VARCHAR(255) NOT NULL,
-  `address_2` VARCHAR(255) NOT NULL,
-  `city` VARCHAR(100) NOT NULL,
-  `county` VARCHAR(100) NOT NULL,
-  `post_code` VARCHAR(10) NOT NULL,
-  `country` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `date` DATETIME NOT NULL,
-  `active` TINYINT(1) NOT NULL DEFAULT '1', -- set default as 0 when using activation email.
-  `encode` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`first_name` VARCHAR(100) NOT NULL,
+	`last_name` VARCHAR(100) NOT NULL,
+	`address_1` VARCHAR(255) NOT NULL,
+	`address_2` VARCHAR(255) NOT NULL,
+	`city` VARCHAR(100) NOT NULL,
+	`county` VARCHAR(100) NOT NULL,
+	`post_code` VARCHAR(10) NOT NULL,
+	`country` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(100) NOT NULL,
+	`password` VARCHAR(255) NOT NULL,
+	`date` DATETIME NOT NULL,
+	`active` TINYINT(1) NOT NULL DEFAULT '1', -- set default as 0 when using activation email.
+	`encode` varchar(255) DEFAULT NULL,
+	PRIMARY KEY (`id`)
 );
 
 
@@ -61,9 +61,10 @@ CREATE TABLE `orders`(
 	`total` DECIMAL(8,2) NOT NULL,
 	`date` DATETIME NOT NULL,
 	`status` INT(10) NOT NULL DEFAULT '1',
-	`paypal_status` TINYINT(1) NOT NULL DEFAULT '0',
+	`paypal_status` TINYINT(1) NOT NULL DEFAULT '0', -- proccessed or not
 	`payment_status` VARCHAR(100) DEFAULT NULL,
-	`notes` TEXT,
+	`txn_id` VARCHAR(100) DEFAULT NULL, -- value sent from PayPal
+	`notes` TEXT  DEFAULT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`user`) REFERENCES `users`(`id`),
 	FOREIGN KEY (`status`) REFERENCES `statuses`(`id`)
@@ -181,13 +182,13 @@ INSERT INTO `products` VALUES (10, 'Slim Fit PV Suit Jacket', '<p>Get suited and
 
 DROP TABLE IF EXISTS `orders_products`;
 CREATE TABLE `orders_products` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `order` INT(10) NOT NULL,
-  `product` INT(10) NOT NULL,
-  `price` DECIMAL(8,2) NOT NULL,
-  `qty` INT(10) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`order`) REFERENCES `orders` (`id`),
+  	`id` INT(10) NOT NULL AUTO_INCREMENT,
+  	`order` INT(10) NOT NULL,
+  	`products` INT(10) NOT NULL,
+  	`price` DECIMAL(8,2) NOT NULL,
+  	`qty` INT(10) NOT NULL DEFAULT '1',
+  	PRIMARY KEY (`id`),
+  	FOREIGN KEY (`order`) REFERENCES `orders` (`id`),
 	FOREIGN KEY (`product`) REFERENCES `products` (`id`)
 );
 
@@ -209,13 +210,13 @@ INSERT INTO `discounts` VALUES (5, 'DIS50', 0.50);
 
 DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `address` TEXT NOT NULL,
-  `phone` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `website` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`)
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL,
+	`address` TEXT NOT NULL,
+	`phone` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(100) NOT NULL,
+	`website` VARCHAR(100) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 INSERT INTO `company` VALUES(1, 'Khizir Store', '11 Bastwick Street<br />London<br />EC1V 3AQ', '01434 454 345', 'info@khizir.com', 'Khizir.com');
 
@@ -223,12 +224,12 @@ INSERT INTO `company` VALUES(1, 'Khizir Store', '11 Bastwick Street<br />London<
 
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(100) NOT NULL,
-  `last_name` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`)
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`first_name` VARCHAR(100) NOT NULL,
+	`last_name` VARCHAR(100) NOT NULL,
+	`email` VARCHAR(100) NOT NULL,
+	`password` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 INSERT INTO `admins` VALUES(1, 'Islam', 'Dudaev', 'islam89uk@gmail.com', 'islam895');
 
@@ -236,9 +237,9 @@ INSERT INTO `admins` VALUES(1, 'Islam', 'Dudaev', 'islam89uk@gmail.com', 'islam8
 
 DROP TABLE IF EXISTS `colours`;
 CREATE TABLE `colours` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `colour` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`)
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`colour` VARCHAR(100) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 INSERT INTO `colours` VALUES(1, 'White');
 INSERT INTO `colours` VALUES(2, 'Black');
@@ -257,9 +258,9 @@ INSERT INTO `colours` VALUES(13, 'Chocolate');
 
 DROP TABLE IF EXISTS `size_numbers`;
 CREATE TABLE `size_numbers` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `size_number` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`id`)
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`size_number` VARCHAR(10) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 INSERT INTO `size_numbers` VALUES(1, '30');
 INSERT INTO `size_numbers` VALUES(2, '31');
@@ -279,9 +280,9 @@ INSERT INTO `size_numbers` VALUES(14, '43');
 
 DROP TABLE IF EXISTS `size_letters`;
 CREATE TABLE `size_letters` (
-  `id` INT(10) NOT NULL AUTO_INCREMENT,
-  `size_letter` VARCHAR(10) NOT NULL,
-  PRIMARY KEY (`id`)
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`size_letter` VARCHAR(10) NOT NULL,
+	PRIMARY KEY (`id`)
 );
 INSERT INTO `size_letters` VALUES(1, 'XXS');
 INSERT INTO `size_letters` VALUES(2, 'XS');

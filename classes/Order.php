@@ -5,50 +5,45 @@ class Order extends Application {
 	private $orders = 'orders';
 	private $o_p = 'orders_products';
 	private $statuses = 'statuses';
+
 	private $basket = array();
-	private $text = array();
+	private $fields = array();
 	private $products = array();
 	private $values = array();
-	private $id = array();
+	private $id = null;
 	
 	
+	// Get products from the session from basket
 	public function getProducts(){
-		
 		$this->basket = Session::getSession('basket');
-		
 		if(!empty($this->basket)){
-			
-			$products = new Products();
-			
+			$objProducts = new Products();
 			foreach($this->basket as $key => $value){
-				$this->products[$key] = $products->getProduct($key);
+				$this->products[$key] = $objProducts->getProduct($key);
 			}
 		}
 	}
 	
+	//used in modules/paypal.php file to create an order
 	public function createOrder(){
-		
 		$this->getProducts();
-		
 		if(!empty($this->products)){
-			
 			$newUser = new User();
 			$user = $newUser->getUser(Session::getSession(Login::$user_login));
 			
 			if(!empty($user)){
-				
 				$newBasket = new Basket();
-				$this->text[] = 'user';
+				$this->fields[] = 'user';
 				$this->values[] = $this->db->escape($user['id']);
 				
-				$this->text[] = 'total';
-				$this->values[] = $this->db->escape($newBasket->totalValue);
+				$this->fields[] = 'total';
+				$this->values[] = $this->db->escape($newBasket->total_value);
 				
-				$this->text[] = 'date';
+				$this->fields[] = 'date';
 				$this->values[] = Check::setDate();
 				
 				$sql  = "INSERT INTO `{$this->orders}` (`";
-				$sql .= implode("`, `", $this->text);
+				$sql .= implode("`, `", $this->fields);
 				$sql .= "`) VALUES ('";
 				$sql .= implode("', '", $this->values);
 				$sql .= "')";
@@ -57,76 +52,53 @@ class Order extends Application {
 				$this->id = $this->db->lastID();
 				
 				if(!empty($this->id)){
-					$this->text = array();
+					//clearing up the arrays
+					$this->fields = array();
 					$this->values = array();
 					
-					return $this->addProducts($this->id);
+					return $this->addProducts($this->id);//can add later an item to the order
 				}
 				
 			}
-			
 			return false;
 		}
-		
 		return false;
 	}
 	
-	
-	
-	private function addProducts($o_id = null){
-		
-		if(!empty($o_id)){
-			
+	// Adding products to the orders_products table.
+	private function addProducts($order_id = null){
+		if(!empty($order_id)){
 			$error = array();
-			
 			foreach($this->products as $product){
-				
 				$sql = "INSERT INTO `{$this->o_p}` 
 						(`order`, `product`, `price`, `qty`)
-						VALUES ('{$o_id}', '".$product['id']."', '".$product['price']."', '".$this->basket[$product['id']]['qty']."')";
-						
+						VALUES ('{$order_id}', '".$product['id']."', '".$product['price']."', '".$this->basket[$product['id']]['qty']."')";
 				if(!$this->db->query($sql)){
 					$error[] = $sql;
 				}
 			}
-			
 			return empty($error) ? true : false;
 		}
-		
 		return false;
 	}
 	
-	
-	public function getOrder($ID = null){
-		
-		$ID = !empty($ID) ? $ID : $this->id;
-		
+	public function getOrder($order_id = null){
+		$order_id = !empty($order_id) ? $order_id : $this->id;
 		$sql = "SELECT * FROM `{$this->orders}` 
-				WHERE `id` = '".$this->db->escape($ID)."'";
-		
-		return $this->db->getAllRecords($sql);		
-		
+				WHERE `id` = '".$this->db->escape($order_id)."'";
+		return $this->db->getAllRecords($sql);	
 	}
 	
-	
-	public function getItems($ID = null){
-		
-		$ID = !empty($ID) ? $ID : $this->id;
-		
+	public function getOrderItems($order_id = null){
+		$order_id = !empty($order_id) ? $order_id : $this->id;
 		$sql = "SELECT * FROM `{$this->o_p}` 
-				WHERE `order` = '".$this->db->escape($ID)."'";
-		
+				WHERE `order` = '".$this->db->escape($order_id)."'";
 		return $this->db->getAllRecords($sql);
 	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
+
+

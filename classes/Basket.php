@@ -56,7 +56,6 @@ class Basket {
 		return $print;
 	}
 	
-	
 	// See pages/basket.php Used to calculate the total amount in main basket.
 	public function priceByQty($price = null, $qty = null) {
 		if (!empty($price) && !empty($qty)) {
@@ -79,11 +78,6 @@ class Basket {
 	
 
 
-
 }
-
-
-
-
 
 

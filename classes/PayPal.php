@@ -2,7 +2,7 @@
 	
 class PayPal {
 	
-	// testing sandbox accounts
+	/*// testing sandbox accounts
 	private $sandbox = 'sandbox';
 	private $sandbox_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 	private $url;
@@ -137,7 +137,7 @@ class PayPal {
 		}
 		
 		return $this->transfer();
-	}
+	}*/
 	
 	
 	

@@ -6,7 +6,8 @@ class Session {
 		// Creating a sesssion called basket with the id of the product and its quantity.
 		$_SESSION['basket'][$id]['qty'] = $qty; 
 	}
-		
+	
+	// Removing an item from the session.
 	public static function removeItem($id, $qty = null) {
 		if ($qty != null && $qty < $_SESSION['basket'][$id]['qty']) {
 			$_SESSION['basket'][$id]['qty'] = ($_SESSION['basket'][$id]['qty'] - $qty);
@@ -31,3 +32,4 @@ class Session {
 
 
 }
+

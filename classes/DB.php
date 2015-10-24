@@ -26,7 +26,6 @@ class DB {
 	// Connecting to the database
 	private function connect() {
 		$this->connectToDB = mysql_connect($this->db_host, $this->db_user, $this->db_password);
-		
 		if (!$this->connectToDB) {
 			die("Database connection error!<br><br>" . mysql_error());
 		} else {
@@ -114,14 +113,12 @@ class DB {
 	// Inserts data into the table
 	// used in User.php -> addUser() method
 	public function insertData($users = null){
-		
 		if(!empty($users) && !empty($this->insert_keys) && !empty($this->insert_values)){
 			$sql  = "INSERT INTO `{$users}` (`";
 			$sql .= implode("`, `", $this->insert_keys); // implode - joins the values from array using concatinator (,)
 			$sql .= "`) VALUES ('";
 			$sql .= implode("', '", $this->insert_values);
 			$sql .= "');";
-			
 			if($this->query($sql)){
 				$this->id = $this->lastID();
 				return true;
@@ -130,7 +127,8 @@ class DB {
 		}
 	}
 	
-	
+	// Method for preparing the info to update the table using updateTable()
+	// used in User.php -> updateUser()method 
 	public function update($array = null){
 		if(!empty($array)){
 			foreach($array as $key => $value){
@@ -139,19 +137,19 @@ class DB {
 		}
 	}
 	
+	// Updates the table info
+	// used in User.php -> updateUser()method and other
 	public function updateTable($table = null, $id = null){
-		
 		if(!empty($table) && !empty($id) && !empty($this->update_records)){
 			$sql  = "UPDATE `{$table}` SET ";
 			$sql .= implode(", ", $this->update_records);
 			$sql .= " WHERE `id` = '".$this->escape($id)."'";
-			
 			return $this->query($sql);
 		}
 	}
 	
-	
-	
-	
+
 	
 }
+
+

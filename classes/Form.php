@@ -33,6 +33,7 @@ class Form {
 		}
 	}
 	
+	// Method for all forms used to stripslashes and also to leave the values in the forms as they are
 	public function textField($field, $value = null){
 		// stripslashes method used to avoid different kinds of characters in a
 		// textfield with slashes.

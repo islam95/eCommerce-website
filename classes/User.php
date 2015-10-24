@@ -5,7 +5,6 @@ class User extends Application {
 	private $users = "users"; // users table in db
 	public $user_id;
 	
-	
 	// Check if the user with specific email address and password exists.
 	public function exist($email, $password){
 		$password = Login::encrypt($password); // encripting the password
@@ -14,7 +13,6 @@ class User extends Application {
 				WHERE `email` = '".$this->db->escape($email)."' 
 				AND `password` = '".$this->db->escape($password)."'
 				AND `active` = 1";
-				
 		$result = $this->db->getOneRecord($sql);
 		
 		if(!empty($result)) {
@@ -26,7 +24,6 @@ class User extends Application {
 	
 	// Adds new user to the database
 	public function addUser($var = null, $password = null){
-		
 		if(!empty($var) && !empty($password)){
 			$this->db->insert($var);
 			if($this->db->insertData($this->users)){
@@ -53,6 +50,7 @@ class User extends Application {
 		return false;
 	}
 	
+	// Getting the user by its id.
 	public function getUser($id = null){
 		if(!empty($id)){
 			$sql = "SELECT * FROM `{$this->users}`
@@ -93,11 +91,10 @@ class User extends Application {
 		}
 	}
 	
+	// Updating the user info (e.g. in the shipping details.)
 	public function updateUser($array = null, $id = null){
-		
 		if(!empty($array) && !empty($id)){
 			$this->db->update($array);
-			
 			if($this->db->updateTable($this->users, $id)){
 				return true;
 			}
@@ -107,12 +104,6 @@ class User extends Application {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+
+

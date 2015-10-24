@@ -22,7 +22,7 @@ if(!empty($session)){
 			<tr class="bold">
 				<th>Product</th>
 				<th class="name">Name</th>
-				<th>Color</th>
+				<th>Colour</th>
 				<th>Size</th>
 				<th>Qty</th>
 				<th>Price</th>

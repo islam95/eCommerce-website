@@ -1,21 +1,20 @@
 <?php
-require_once('../include/load.php');
+require_once('../include/autoload.php');
 	
 // tokens
 $token2 = Session::getSession('token2');
-$form = new Select();
-$token = $form->getPost('token');
+$form = new Form();
+$token1 = $form->getPost('token');
 
-if($token2 == Login::encrypt($token)){
-	
+// checking if they match
+if($token2 == Login::encrypt($token1)){
 	// Creating order.
 	$newOrder = new Order();
-	
 	if($newOrder->createOrder()){
 		
-		// insert into order details.
+		//populate order details.
 		$order = $newOrder->getOrder();
-		$products = $newOrder->getItems();
+		$items = $newOrder->getOrderItems();
 		
 		if(!empty($order) && !empty($products)){
 			
@@ -47,10 +46,10 @@ if($token2 == Login::encrypt($token)){
 				
 				// redirecting to PayPal
 				echo $newPayPal->redirectPayPal($order['id']);
-				
 			}
-			
 		}
-		
 	}
 }
+
+
+

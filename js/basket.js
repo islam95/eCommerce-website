@@ -137,7 +137,7 @@ $(document).ready(function() {
 					}
 				},
 				error: function(data) {
-					alert("Error occured in AJAX call for add_to_basket().");
+					alert("Error occurred in AJAX call for add_to_basket().");
 				}
 			});
 			return false; // so that the page does not scroll up or down when clicking the buttons
@@ -145,10 +145,11 @@ $(document).ready(function() {
 		});
 	}
 	
-	// Proceeding to PayPal.
-	if($('.paypal').length > 0){
-		$('.paypal').click(function(){
-			var aToken = $(this).attr('id');
+/*	// Proceeding to PayPal button.
+	if($('.paypal').length > 0){ //if paypal class found
+		$('.paypal').click(function(){ //by clicking on it execute the function
+			// replacement for checkout page
+			var token = $(this).attr('id');
 			var loading = "<div class=\"load\">";
 			loading = loading + "<p class=\"loading\"></p>";
 			loading = loading + "<p>Redirecting to PayPal...</p>";
@@ -157,23 +158,45 @@ $(document).ready(function() {
 			
 			$('#cart').fadeOut(200, function(){
 				$(this).html(loading).fadeIn(200, function(){
-					paypal(aToken);
+					paypal(token);
+				});
+			});
+			
+		});
+	}*/
+
+
+	// Proceeding to PayPal button.
+	if($('.paypal').length > 0){ //if paypal class found
+		$('.paypal').click(function(){ //by clicking on it execute the function
+			// replacement for checkout page
+			var token = $(this).attr('id');
+			var loading = "<div style=\"text-align:centre\">";
+			loading = loading + "<img src=\"images/loading.gif\"";
+			loading = loading + " alt=\"Redirecting to PayPal\" />";
+			loading = loading + "<br>Redirecting to PayPal...";
+			loading = loading + "</div><div id=\"paypal_form\"></div>";
+			
+			$('#cart').fadeOut(200, function(){
+				$(this).html(loading).fadeIn(200, function(){
+					paypal(token);
 				});
 			});
 			
 		});
 	}
-	
-	function paypal(aToken){
+
+	// Sending data to PayPal.
+	function paypal(token){
 		$.ajax({
 			type: 'POST',
 			url: 'modules/paypal.php',
-			data: ({ aToken : aToken }),
+			data: ({ token : token }),
 			dataType: 'html',
 			success: function(data){
-				$('#_paypal').html(data);
+				$('#paypal_form').html(data);
 				// Submitting form automatically.
-				$('.formPayPal').submit();	
+				$('#formPP').submit();	
 			},
 			error: function(){
 				alert("Error occurred in a paypal() function.");
@@ -182,12 +205,7 @@ $(document).ready(function() {
 	}
 	
 	
-
 	
 });
-
-
-
-
 
 
