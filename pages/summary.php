@@ -61,14 +61,9 @@ if(!empty($array)){ ?>
 			<div><a href="?page=basket" class="back_order">&laquo; Back</a></div> 
 		</form>
 	</div>	
-	<!-- <div>
-		<p class="dn loading"></p>
-	</div> -->
-
 	<div class="dn">
 		<img src="images/loading.gif" alt="Redirecting to PayPal" />
 	</div>
-	
 <?php 
 } else { ?>
 	<p>You do not have any items in your basket.</p>	

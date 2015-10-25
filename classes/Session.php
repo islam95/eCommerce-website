@@ -29,6 +29,16 @@ class Session {
 		}
 	}
 
+	// To clear the session, e.g. the basket 
+	public static function clear($id = null){
+		if (!empty($id) && isset($_SESSION[$id])) {
+			$_SESSION[$id] = null;
+			unset($_SESSION[$id]);			
+		} else{
+			//if we don't pass any parameter all the sessions will be cleared.
+			session_destroy();
+		}
+	}
 
 
 }

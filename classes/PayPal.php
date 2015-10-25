@@ -14,24 +14,23 @@ class PayPal {
 	private $_cmd;
 	private $products = array(); //all products
 	private $fields = array(); //all input fields
-	private $paypal_email = ''; //paypal id
+	private $paypal_email = 'acjx557-merchant@gmail.com'; //paypal merchant email address for business property
 	private $currency = 'GBP'; //currency code
 	private $ipn_data = array(); //data received from paypal
 	private $ipn_result; //result of sending data back to paypal after ipn
 	private $log_file = null; //path to the log file for ipn response
-	private $page_style = null; //page styles
+	private $page_style = 'Khizir'; //page styles, used for paypal payment page styles
 	//prepopulating checkout pages
 	//first_name*, last_name*, address1*, address2, city*, postcode*, country*, email*, 
 	public $populate = array(); //so user will not have to retype all his/her info at PayPal
 	
 	
 	public function __construct($cmd = '_cart'){
-		//$this->url = $this->sandbox_url;
 		$this->url = $this->sandbox == 'sandbox' ? $this->sandbox_url : $this->paypal_url;
 		$this->_cmd = $cmd;
-		$this->return_url = WEBSITE_URL."?page=payment-successful";
-		$this->cancel_url = WEBSITE_URL."?page=payment-cancelled";
-		$this->notify_url = WEBSITE_URL."?page=ipn";
+		$this->return_url = WEBSITE_URL.DIR_SEP."kh".DIR_SEP."?page=payment_successful";
+		$this->cancel_url = WEBSITE_URL.DIR_SEP."kh".DIR_SEP."?page=payment_cancelled";
+		$this->notify_url = WEBSITE_URL.DIR_SEP."kh".DIR_SEP."?page=ipn";
 		$this->log_file = ROOT_PATH.DIR_SEP."log".DIR_SEP."ipn.log";
 	}
 	
