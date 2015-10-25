@@ -7,6 +7,5 @@ class Application {
 		$this->db = new DB(); // new instance of database class.
 	}
 	
-	
-	
 }
+
