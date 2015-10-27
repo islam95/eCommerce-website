@@ -94,8 +94,30 @@ class Order extends Application {
 		return $this->db->getAllRecords($sql);
 	}
 	
-	
-	
+	public function approve($array = null, $result = null){
+		if(!empty($array) && !empty($result)){
+			if (array_key_exists('txn_id', $array) &&
+				array_key_exists('payment_status', $array) &&
+				array_key_exists('custom', $array)) {
+					
+				$active = $array['payment_status'] == 'Completed' ? 1 : 0;
+				$print = array();
+				foreach($array as $key => $value){
+					$print[] = "{$key} : {$value}";
+				}
+				$print = implode("\n", $print);
+				
+				$sql = "UPDATE `{$this->orders}` 
+						SET `paypal_status` = '". $this->db->escape($active) ."',
+						`txn_id` = '". $this->db->escape($array['txn_id']) ."',
+						`payment_status` = '". $this->db->escape($array['payment_status']) ."', 
+						`ipn` = '". $this->db->escape($print) ."',
+						`response` = '". $this->db->escape($result). "'
+						WHERE `id` = '". $this->db->escape($array['custom']) ."'";
+				$this->db->query($sql);
+			}
+		}
+	}
 
 }
 

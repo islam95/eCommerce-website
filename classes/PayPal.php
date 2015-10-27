@@ -18,7 +18,6 @@ class PayPal {
 	private $currency = 'GBP'; //currency code
 	private $ipn_data = array(); //data received from paypal
 	private $ipn_result; //result of sending data back to paypal after ipn
-	private $log_file = null; //path to the log file for ipn response
 	private $page_style = 'Khizir'; //page styles, used for paypal payment page styles
 	//prepopulating checkout pages
 	//first_name*, last_name*, address1*, address2, city*, postcode*, country*, email*, 
@@ -31,7 +30,6 @@ class PayPal {
 		$this->return_url = WEBSITE_URL.DIR_SEP."kh".DIR_SEP."?page=payment_successful";
 		$this->cancel_url = WEBSITE_URL.DIR_SEP."kh".DIR_SEP."?page=payment_cancelled";
 		$this->notify_url = WEBSITE_URL.DIR_SEP."kh".DIR_SEP."?page=ipn";
-		$this->log_file = ROOT_PATH.DIR_SEP."log".DIR_SEP."ipn.log";
 	}
 	
 	public function addProduct($number, $name, $price = 0, $qty = 1){
@@ -133,6 +131,78 @@ class PayPal {
 		return $this->transfer();
 	}
 	
+	private function validIpn(){
+		$host = gethostbyaddr($_SERVER['REMOTE_ADDR']); //host by address
+		//check if post has been received from paypal.com
+		if(!preg_match('/paypal\.com$/', $host)){
+			return false;
+		}
+		// get all posted variables and put them to array
+		$form = new Form();
+		$this->ipn_data = $form->getPostArray();
+		// check if email of the business matches the email received in post from IPN
+		if(!empty($this->ipn_data) && 
+			array_key_exists('receiver_email', $this->ipn_data) && 
+			strtolower($this->ipn_data['receiver_email']) != 
+			strtolower($this->paypal_email)){
+				return false;
+			}
+		return true;
+	}
+	
+	private function getReturnParams(){
+		//notify-validate - need to send back to PayPal after ipn response.
+		$print = array('cmd=notify-validate');
+		if(!empty($this->ipn_data)){
+			foreach($this->ipn_data as $key => $value){
+				$value = function_exists('get_magic_quotes_gpc') ? 
+							urlencode(stripcslashes($value)) : 
+							urldecode($value);
+				$print[] = "{$key}={$value}";
+			}
+		}
+		return implode("&", $print);
+	}
+	
+	// Sending data back to PayPal after istant payment notification
+	private function sendCurl(){
+		$response = $this->getReturnParams();
+		
+		$curl = curl_init(); //inistialising the curl
+		curl_setopt($curl, CURLOPT_URL, $this->url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $response);
+		curl_setopt($curl, CURLOPT_HEADER, 0);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+			"Content-Type: application/x-www-form-urlencoded",
+			"Content-Length: ".strlen($response)
+		));
+		curl_setopt($curl, CURLOPT_VERBOSE, 1);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+		// Response from this call will be stored within ipn_result parameter
+		$this->ipn_result = curl_exec($curl); 
+		curl_close($curl);
+	}
+	
+	//Instant Paypemnt Notification
+	public function ipn(){
+		if($this->validIpn()){
+			$this->sendCurl(); //using php curl library
+			//string compare with verified order from PayPal
+			if (strcmp($this->ipn_result, "VERIFIED") == 0) {
+				$order = new Order();
+				// update order status
+				if (!empty($this->ipn_data)) {
+					//identifying the specific order by following
+					$order->approve($this->ipn_data, $this->ipn_result);
+				}
+			}
+			
+		}
+	}
 	
 	
 	
