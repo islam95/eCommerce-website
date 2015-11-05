@@ -167,24 +167,25 @@ class PayPal {
 	// Sending data back to PayPal after istant payment notification
 	private function sendCurl(){
 		$response = $this->getReturnParams();
-		
-		$curl = curl_init(); //inistialising the curl
-		curl_setopt($curl, CURLOPT_URL, $this->url);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($curl, CURLOPT_POST, 1);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $response);
-		curl_setopt($curl, CURLOPT_HEADER, 0);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+		// create a new cURL resource
+		$ch = curl_init(); //the cURL handle
+		// set URL and other appropriate options
+		curl_setopt($ch, CURLOPT_URL, $this->url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $response);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			"Content-Type: application/x-www-form-urlencoded",
-			"Content-Length: ".strlen($response)
+			"Content-Length: " . strlen($response)
 		));
-		curl_setopt($curl, CURLOPT_VERBOSE, 1);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-		curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+		curl_setopt($ch, CURLOPT_VERBOSE, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 		// Response from this call will be stored within ipn_result parameter
-		$this->ipn_result = curl_exec($curl); 
-		curl_close($curl);
+		$this->ipn_result = curl_exec($ch); 
+		curl_close($ch); // close cURL resource, and free up system resources
 	}
 	
 	//Instant Paypemnt Notification
@@ -200,9 +201,37 @@ class PayPal {
 					$order->approve($this->ipn_data, $this->ipn_result);
 				}
 			}
-			
+			// $this->saveLog();
 		}
 	}
+
+	// Saving the log into log file from PayPal IPN.
+	/**
+	private function saveLog(){
+		if($this->log_file != null){
+			$print = array();
+			// current date
+			$print[] = "Date: ".date('d/m/Y H:i:s', time());
+			// status
+			$print[] = "Status: ".$this->ipn_result;
+			// log the POST variables 
+			$print[] = "IPN Response:\n\n";
+			
+			if(!empty($this->ipn_data)){
+				foreach($this->ipn_data as $key => $value){
+					$print[] = "{$key} : {$value}";
+				}
+			}
+			
+			// open and write to the log file
+			$fp = fopen($this->log_file, 'a');
+			$text  = implode("\n", $print);
+			$text .= "\n\n------------------------\n\n";
+			fwrite($fp, $text);
+			fclose($fp);
+		}
+	}
+	**/
 	
 	
 	

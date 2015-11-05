@@ -13,7 +13,7 @@ if($token2 == Login::encrypt($token1)){
 	if($newOrder->createOrder()){
 		//populate order details.
 		$order = $newOrder->getOrder();
-		$items = $newOrder->getOrderItems();
+		$items = $newOrder->getOrderProducts();
 		
 		if(!empty($order) && !empty($items)){
 			$newProducts = new Products();
@@ -29,7 +29,7 @@ if($token2 == Login::encrypt($token1)){
 			
 			if(!empty($user)){
 				// passing user details to PayPal instance.
-				$newPayPal->_populate = array(
+				$newPayPal->populate = array(
 					'address1' 		=> $user['address_1'],
 					'address2' 		=> $user['address_2'],
 					'city' 			=> $user['city'],
@@ -47,6 +47,4 @@ if($token2 == Login::encrypt($token1)){
 		}
 	}
 }
-
-
 

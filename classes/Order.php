@@ -8,26 +8,26 @@ class Order extends Application {
 
 	private $basket = array();
 	private $fields = array();
-	private $items = array();
+	private $products = array();
 	private $values = array();
 	private $id = null;
 	
 	
 	// Get products from the session from basket
-	public function getItems(){
+	public function getProducts(){
 		$this->basket = Session::getSession('basket');
 		if(!empty($this->basket)){
 			$objProducts = new Products();
 			foreach($this->basket as $key => $value){
-				$this->items[$key] = $objProducts->getProduct($key);
+				$this->products[$key] = $objProducts->getProduct($key);
 			}
 		}
 	}
 	
 	//used in modules/paypal.php file to create an order
 	public function createOrder(){
-		$this->getItems();
-		if(!empty($this->items)){
+		$this->getProducts();
+		if(!empty($this->products)){
 			$newUser = new User();
 			$user = $newUser->getUser(Session::getSession(Login::$user_login));
 			
@@ -55,7 +55,7 @@ class Order extends Application {
 					//clearing up the arrays
 					$this->fields = array();
 					$this->values = array();
-					return $this->addItems($this->id);
+					return $this->addProducts($this->id);
 				}
 			}
 			return false;
@@ -63,14 +63,14 @@ class Order extends Application {
 		return false;
 	}
 	
-	// Adding items to the orders_products table.
-	private function addItems($order_id = null){
+	// Adding products to the orders_products table.
+	private function addProducts($order_id = null){
 		if(!empty($order_id)){
 			$error = array();
-			foreach($this->items as $item){
+			foreach($this->products as $product){
 				$sql = "INSERT INTO `{$this->o_p}` 
 						(`order`, `product`, `price`, `qty`)
-						VALUES ('{$order_id}', '".$item['id']."', '".$item['price']."', '".$this->basket[$item['id']]['qty']."')";
+						VALUES ('{$order_id}', '".$product['id']."', '".$product['price']."', '".$this->basket[$product['id']]['qty']."')";
 				if(!$this->db->query($sql)){
 					$error[] = $sql;
 				}
@@ -87,7 +87,7 @@ class Order extends Application {
 		return $this->db->getOneRecord($sql);	
 	}
 	
-	public function getOrderItems($order_id = null){
+	public function getOrderProducts($order_id = null){
 		$order_id = !empty($order_id) ? $order_id : $this->id;
 		$sql = "SELECT * FROM `{$this->o_p}` 
 				WHERE `order` = '".$this->db->escape($order_id)."'";
@@ -118,6 +118,9 @@ class Order extends Application {
 			}
 		}
 	}
+
+
+
 
 }
 
