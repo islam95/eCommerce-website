@@ -64,7 +64,7 @@ CREATE TABLE `orders`(
 	`paypal_status` TINYINT(1) NOT NULL DEFAULT '0', -- proccessed or not
 	`payment_status` VARCHAR(100) DEFAULT NULL,
 	`txn_id` VARCHAR(100) DEFAULT NULL, -- value sent from PayPal
-	`ipn` TEXT DEFAULT NULL, -- for the log file to store the order info
+	`ipn` TEXT DEFAULT NULL, -- to store the order info
     `response` VARCHAR(100) DEFAULT NULL,
 	`notes` TEXT  DEFAULT NULL,
 	PRIMARY KEY (`id`),

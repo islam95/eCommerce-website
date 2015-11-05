@@ -8,26 +8,26 @@ class Order extends Application {
 
 	private $basket = array();
 	private $fields = array();
-	private $products = array();
+	private $items = array();
 	private $values = array();
 	private $id = null;
 	
 	
 	// Get products from the session from basket
-	public function getProducts(){
+	public function getItems(){
 		$this->basket = Session::getSession('basket');
 		if(!empty($this->basket)){
 			$objProducts = new Products();
 			foreach($this->basket as $key => $value){
-				$this->products[$key] = $objProducts->getProduct($key);
+				$this->items[$key] = $objProducts->getProduct($key);
 			}
 		}
 	}
 	
 	//used in modules/paypal.php file to create an order
 	public function createOrder(){
-		$this->getProducts();
-		if(!empty($this->products)){
+		$this->getItems();
+		if(!empty($this->items)){
 			$newUser = new User();
 			$user = $newUser->getUser(Session::getSession(Login::$user_login));
 			
@@ -55,7 +55,7 @@ class Order extends Application {
 					//clearing up the arrays
 					$this->fields = array();
 					$this->values = array();
-					return $this->addProducts($this->id);//can add later an item to the order
+					return $this->addItems($this->id);
 				}
 			}
 			return false;
@@ -63,14 +63,14 @@ class Order extends Application {
 		return false;
 	}
 	
-	// Adding products to the orders_products table.
-	private function addProducts($order_id = null){
+	// Adding items to the orders_products table.
+	private function addItems($order_id = null){
 		if(!empty($order_id)){
 			$error = array();
-			foreach($this->products as $product){
+			foreach($this->items as $item){
 				$sql = "INSERT INTO `{$this->o_p}` 
 						(`order`, `product`, `price`, `qty`)
-						VALUES ('{$order_id}', '".$product['id']."', '".$product['price']."', '".$this->basket[$product['id']]['qty']."')";
+						VALUES ('{$order_id}', '".$item['id']."', '".$item['price']."', '".$this->basket[$item['id']]['qty']."')";
 				if(!$this->db->query($sql)){
 					$error[] = $sql;
 				}
@@ -80,10 +80,10 @@ class Order extends Application {
 		return false;
 	}
 	
-	public function getOrder($_id = null){
-		$_id = !empty($_id) ? $_id : $this->id;
+	public function getOrder($order_id = null){
+		$order_id = !empty($order_id) ? $order_id : $this->id;
 		$sql = "SELECT * FROM `{$this->orders}` 
-				WHERE `id` = '".$this->db->escape($_id)."'";
+				WHERE `id` = '".$this->db->escape($order_id)."'";
 		return $this->db->getOneRecord($sql);	
 	}
 	

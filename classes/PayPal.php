@@ -152,7 +152,7 @@ class PayPal {
 	
 	private function getReturnParams(){
 		//notify-validate - need to send back to PayPal after ipn response.
-		$print = array('cmd=notify-validate');
+		$print = array('cmd=_notify-validate');
 		if(!empty($this->ipn_data)){
 			foreach($this->ipn_data as $key => $value){
 				$value = function_exists('get_magic_quotes_gpc') ? 

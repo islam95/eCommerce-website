@@ -16,12 +16,11 @@ if($token2 == Login::encrypt($token1)){
 		$items = $newOrder->getOrderItems();
 		
 		if(!empty($order) && !empty($items)){
-			$newBasket = new Basket();
-			$products = new Products();
+			$newProducts = new Products();
 			$newPayPal = new PayPal();
 			
 			foreach($items as $item){
-				$product = $products->getProduct($item['product']);
+				$product = $newProducts->getProduct($item['product']);
 				$newPayPal->addProduct($item['product'], $product['name'], $item['price'], $item['qty']);
 			}
 			//populate user details.
@@ -30,7 +29,7 @@ if($token2 == Login::encrypt($token1)){
 			
 			if(!empty($user)){
 				// passing user details to PayPal instance.
-				$newPayPal->populate = array(
+				$newPayPal->_populate = array(
 					'address1' 		=> $user['address_1'],
 					'address2' 		=> $user['address_2'],
 					'city' 			=> $user['city'],
