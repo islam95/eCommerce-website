@@ -17,12 +17,12 @@ class Email {
 		$this->mail->SMTPSecure = "ssl";  //SMTP ssl encryption
 		$this->isHTML(true);
 		//Provide username and password     
-		$this->mail->Username = "islamwolf23@gmail.com";
-		$this->mail->Password = "yusufibnumar89"; 
+		$this->mail->Username = "islam@gmail.com";
+		$this->mail->Password = "yusufi"; 
 		
-		$this->mail->From = "islamwolf23@gmail.com";
+		$this->mail->From = "islam@gmail.com";
 		$this->mail->FromName = "Islam Dudaev";
-		$this->mail->addReplyTo("islamwolf23@gmail.com", "Islam");
+		$this->mail->addReplyTo("islam@gmail.com", "Islam");
 
 	}
 
