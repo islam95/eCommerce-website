@@ -233,7 +233,7 @@ CREATE TABLE `admins` (
 	`password` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`id`)
 );
-INSERT INTO `admins` VALUES(1, 'Islam', 'Dudaev', 'islam89uk@gmail.com', 'islam895');
+INSERT INTO `admins` VALUES(1, 'Islam', 'Dudaev', 'islam@gmail.com', 'islam');
 
 
 
